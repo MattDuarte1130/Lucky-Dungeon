@@ -1,3 +1,39 @@
+div {
+  outline: 1px solid black;
+}
+
+#container{
+  height: 720px;
+  width: 960px;
+  display: block;
+  top: 50px;
+  margin: 0 auto;
+  position: absolute;
+}
+
+#bottomContainer{
+  height: 120px;
+  width: 960px;
+  top: 600px;
+  margin: 0 auto;
+  position: absolute;
+}
+
+#itemContainer {
+  height: 120px;
+  width: 310px;
+  top: 600px;
+  margin: 0 auto;
+
+}
+
+#itemOne, #itemTwo, #itemThree{
+  height: 120px;
+  width: 103px;
+  float: left;
+  margin: 0 auto;
+}
+
 body {
   background-color: blue;
 }

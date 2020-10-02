@@ -16,7 +16,8 @@ class Player {
     this.armor = armor;
   }
   useBasicAttack(enemy) {
-    enemy.currentHealth += enemy.armor -= this.attackPower;
+    enemy.currentHealth += enemy.armor;
+    enemy.currentHealth -= this.attackPower;
     console.log(
       "Your attack hit! " +
         enemy.name +
@@ -100,7 +101,8 @@ class Enemy {
     this.armor = 1 + Math.floor(Math.random() * (3 - 1 + 1));
   }
   useBasicAttack(enemy) {
-    enemy.currentHealth += enemy.armor -= this.attackPower;
+    enemy.currentHealth += enemy.armor;
+    enemy.currentHealth -= this.attackPower;
     console.log(
       "Your attack hit! " +
         enemy.name +
@@ -137,6 +139,11 @@ console.log(firstAbility);
 console.log(firstArmor);
 console.log(playerOne);
 console.log(enemyOne);
+
+playerOne.useBasicAttack(enemyOne)
+playerOne.useBasicAttack(enemyOne)
+playerOne.useBasicAttack(enemyOne)
+
 
 let getPlayerHealthPercentage =
   (playerOne.currentHealth / playerOne.maxVitality) * 100 + "%";

@@ -3,7 +3,7 @@ div {
 }
 
 /* Health Bars */
-.healthBar {
+.playerHealthBar {
   position: relative;
   width: 200px;
   height: 30px;
@@ -23,7 +23,29 @@ div {
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  float: right;
+}
 
+.enemyHealthBar {
+  position: relative;
+  width: 200px;
+  height: 30px;
+}
+
+.enemyHealthBarFill{
+  height: 100%;
+  width: 100%;
+  background: #ff3300;
+}
+
+.enemyHealthBarValue{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
 }
 
 #container{

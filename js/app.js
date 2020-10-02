@@ -38,9 +38,6 @@ class Enemy {
     }
   }
 
-  // Class Health Bar
-
-
 
 
   let playerOne = new Player("Matt");
@@ -55,7 +52,6 @@ class Enemy {
 let getPlayerHealthPercentage = playerOne.currentHealth / playerOne.maxVitality * 100 + "%"
 let $playerHealthBar = $('.healthBarValue').text(playerOne.currentHealth + "/" + playerOne.maxVitality)
 let $playerHealthBarFill = $('.healthBarFill').css({'width': getPlayerHealthPercentage})
-
 
 
 let getEnemyHealthPercentage = enemyOne.currentHealth / enemyOne.maxVitality * 100 + "%"

@@ -17,6 +17,17 @@ class Player {
         console.log("Your ability hit! " + enemy.name + "'s HP is now at " + enemy.currentHealth + "!")
     }
   }
+  // Class for Weapon Items
+  class Weapon {
+    constructor(name, attackPower){
+      this.name = name
+      this.attackPower = 2 + Math.floor((Math.random()) * ((2 - 1) + 1))
+    }
+    boostPlayerAttack(player){
+        player.attackPower += this.attackPower
+        console.log(`The ${this.name} boosted ${player.name} attack power by ${this.attackPower}!`)
+      }
+    }
 
 // Class For Enemy
 class Enemy {
@@ -38,15 +49,14 @@ class Enemy {
     }
   }
 
-
-
   let playerOne = new Player("Matt");
   let enemyOne = new Enemy("Wimpy Orc");
+  let firstWeapon = new Weapon("Poopy Twig")
+  
   console.log(playerOne)
   console.log(enemyOne)
+  console.log(firstWeapon)
 
-  console.log(playerOne.useBasicAttack(enemyOne))
-  console.log(enemyOne.useAbilityPower(playerOne))
 
 
 let getPlayerHealthPercentage = playerOne.currentHealth / playerOne.maxVitality * 100 + "%"
@@ -58,11 +68,30 @@ let getEnemyHealthPercentage = enemyOne.currentHealth / enemyOne.maxVitality * 1
 let $enemyHealthBar = $('.enemyHealthBarValue').text(enemyOne.currentHealth + "/" + enemyOne.maxVitality)
 let $enemyHealthBarFill = $('.enemyHealthBarFill').css({'width': getEnemyHealthPercentage})
 
+const playerBasicAttack = (enemy) =>{
+  playerOne.useBasicAttack(enemy)
+}
 
+// phyical attack button now has a cooldown
+$('#playerPhysicalAttack').on('click', function(){
+  let basicAttackBtn = $(this);
+  basicAttackBtn.prop('disabled', true);
+  setTimeout(function(){
+    basicAttackBtn.prop('disabled', false);
+  }, 1000);
+});
 
+// ability attack button now has a cooldown
+$('#playerAbilityAttack').on('click', function(){
+  let abilityAttackBtn = $(this);
+  abilityAttackBtn.prop('disabled', true);
+  setTimeout(function(){
+    abilityAttackBtn.prop('disabled', false);
+  }, 5000);
+});
 
 
 
   $(()=>{
 
-  })
+  });

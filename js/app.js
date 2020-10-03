@@ -15,24 +15,23 @@ class Player {
     this.abilityPower = abilityPower;
     this.armor = armor;
   }
-  useBasicAttack(enemy) {
-    enemy.currentHealth += enemy.armor;
-    enemy.currentHealth -= this.attackPower;
+  useBasicAttack(target) {
+    target.currentHealth -= this.attackPower;
     console.log(
       "Your attack hit! " +
-        enemy.name +
+        target.name +
         "'s HP is now at " +
-        enemy.currentHealth +
+        target.currentHealth +
         "!"
     );
   }
-  useAbilityPower(enemy) {
-    enemy.currentHealth -= this.abilityPower;
+  useAbilityPower(target) {
+    target.currentHealth -= this.abilityPower;
     console.log(
       "Your ability hit! " +
-        enemy.name +
+        target.name +
         "'s HP is now at " +
-        enemy.currentHealth +
+        target.currentHealth +
         "!"
     );
   }
@@ -71,7 +70,7 @@ class Armor {
   constructor(name, vitality, armor) {
     this.name = name;
     this.vitality = 9 + Math.floor(Math.random() * (9 - 1 + 1));
-    this.armor = 4 + Math.floor(Math.random() * (4 - 1 + 1));
+    this.armor = 0 //4 + Math.floor(Math.random() * (4 - 1 + 1));
   }
   boostPlayerMaxVitalityAndArmor(player) {
     player.maxVitality += this.vitality;
@@ -91,37 +90,47 @@ class Enemy {
     currentHealth,
     attackPower,
     abilityPower,
-    armor
+    armor,
   ) {
     this.name = name;
     this.maxVitality = maxVitality;
     this.currentHealth = maxVitality;
-    this.attackPower = 1 + Math.floor(Math.random() * (2 - 1 + 1));
+    this.attackPower = 2 + Math.floor(Math.random() * (5 - 2 + 1));
     this.abilityPower = 10 + Math.floor(Math.random() * (10 - 7 + 1));
     this.armor = 1 + Math.floor(Math.random() * (3 - 1 + 1));
   }
-  useBasicAttack(enemy) {
-    enemy.currentHealth += enemy.armor;
-    enemy.currentHealth -= this.attackPower;
-    console.log(
-      "Your attack hit! " +
-        enemy.name +
-        "'s HP is now at " +
-        enemy.currentHealth +
-        "!"
-    );
+  useBasicAttack(target) {
+    if(target.currentHealth >= 0 && this.currentHealth >= 0){
+      target.currentHealth -= this.attackPower;
+      console.log(
+        "Your attack hit! " +
+          target.name +
+          "'s HP is now at " +
+          target.currentHealth +
+          "!"
+      );
+    } else {
+      clearInterval(this.intervalId)
+    }
   }
   useAbilityPower(enemy) {
-    enemy.currentHealth -= this.abilityPower;
+    target.currentHealth -= this.abilityPower;
     console.log(
       "Your ability hit! " +
-        enemy.name +
+        target.name +
         "'s HP is now at " +
-        enemy.currentHealth +
+        target.currentHealth +
         "!"
     );
   }
+  startAttacking(target){
+      this.intervalId = setInterval(()=> this.useBasicAttack(target), 1250);
+  }
 }
+
+
+
+
 
 let playerOne = new Player("Matt");
 let enemyOne = new Enemy("Wimpy Orc");
@@ -133,18 +142,22 @@ firstWeapon.boostPlayerAttack(playerOne);
 firstArmor.boostPlayerMaxVitalityAndArmor(playerOne)
 firstAbility.boostPlayerAbility(playerOne)
 
-
+enemyOne.startAttacking(playerOne);
 console.log(firstWeapon);
 console.log(firstAbility);
 console.log(firstArmor);
 console.log(playerOne);
 console.log(enemyOne);
 
-playerOne.useBasicAttack(enemyOne)
-playerOne.useBasicAttack(enemyOne)
-playerOne.useBasicAttack(enemyOne)
+//let enemyAttacks = setInterval(()=> enemyOne.startAttacking(playerOne), 1250);
+//console.log(enemyAttacks)
 
 
+
+//playerOne.useBasicAttack(enemyOne)
+//playerOne.useBasicAttack(enemyOne)
+
+// Health Bars --------------------
 let getPlayerHealthPercentage =
   (playerOne.currentHealth / playerOne.maxVitality) * 100 + "%";
 let $playerHealthBar = $(".healthBarValue").text(

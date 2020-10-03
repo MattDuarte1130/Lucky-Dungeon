@@ -14,25 +14,20 @@ class Player {
     this.attackPower = attackPower;
     this.abilityPower = abilityPower;
     this.armor = armor;
+    this.interval = true;
   }
   useBasicAttack(target) {
+    getEnemyHealthBar(target)
     target.currentHealth -= this.attackPower;
     console.log(
-      "Your attack hit! " +
-        target.name +
-        "'s HP is now at " +
-        target.currentHealth +
-        "!"
+      `${this.name}'s basic attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
     );
   }
   useAbilityPower(target) {
+    getEnemyHealthBar(target)
     target.currentHealth -= this.abilityPower;
     console.log(
-      "Your ability hit! " +
-        target.name +
-        "'s HP is now at " +
-        target.currentHealth +
-        "!"
+      `${this.name}'s ability attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
     );
   }
 }
@@ -82,7 +77,7 @@ class Armor {
   }
 }
 
-// Class For Enemy
+// -------------Class For Enemy---------------
 class Enemy {
   constructor(
     name,
@@ -101,35 +96,31 @@ class Enemy {
   }
   useBasicAttack(target) {
     if(target.currentHealth >= 0 && this.currentHealth >= 0){
+      getHealthBars(target)
       target.currentHealth -= this.attackPower;
       console.log(
-        "Your attack hit! " +
-          target.name +
-          "'s HP is now at " +
-          target.currentHealth +
-          "!"
+        `${this.name}'s basic attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
       );
     } else {
       clearInterval(this.intervalId)
     }
   }
-  useAbilityPower(enemy) {
-    target.currentHealth -= this.abilityPower;
-    console.log(
-      "Your ability hit! " +
-        target.name +
-        "'s HP is now at " +
-        target.currentHealth +
-        "!"
-    );
+  useAbilityPower(target) {
+    if(target.currentHealth >= 0 && this.currentHealth >= 0){
+      getHealthBars(target)
+      target.currentHealth -= this.abilityPower;
+      console.log(
+        `${this.name}'s ability attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
+      );
+    } else {
+      clearInterval(this.intervalId)
+    }
   }
   startAttacking(target){
       this.intervalId = setInterval(()=> this.useBasicAttack(target), 1250);
+      this.intervalId = setInterval(()=> this.useAbilityPower(target), 5500);
   }
 }
-
-
-
 
 
 let playerOne = new Player("Matt");
@@ -153,32 +144,29 @@ console.log(enemyOne);
 //console.log(enemyAttacks)
 
 
-
-//playerOne.useBasicAttack(enemyOne)
-//playerOne.useBasicAttack(enemyOne)
-
 // Health Bars --------------------
+const getHealthBars = (player) =>{
 let getPlayerHealthPercentage =
-  (playerOne.currentHealth / playerOne.maxVitality) * 100 + "%";
+  (player.currentHealth / player.maxVitality) * 100 + "%";
 let $playerHealthBar = $(".healthBarValue").text(
-  playerOne.currentHealth + "/" + playerOne.maxVitality
+  player.currentHealth + "/" + player.maxVitality
 );
 let $playerHealthBarFill = $(".healthBarFill").css({
   width: getPlayerHealthPercentage,
 });
+}
 
+const getEnemyHealthBar = (enemy) =>{
 let getEnemyHealthPercentage =
-  (enemyOne.currentHealth / enemyOne.maxVitality) * 100 + "%";
+  (enemy.currentHealth / enemy.maxVitality) * 100 + "%";
 let $enemyHealthBar = $(".enemyHealthBarValue").text(
-  enemyOne.currentHealth + "/" + enemyOne.maxVitality
+  enemy.currentHealth + "/" + enemy.maxVitality
 );
 let $enemyHealthBarFill = $(".enemyHealthBarFill").css({
   width: getEnemyHealthPercentage,
 });
+}
 
-const playerBasicAttack = (enemy) => {
-  playerOne.useBasicAttack(enemy);
-};
 
 // phyical attack button now has a cooldown
 $("#playerPhysicalAttack").on("click", function () {
@@ -198,4 +186,7 @@ $("#playerAbilityAttack").on("click", function () {
   }, 5000);
 });
 
-$(() => {});
+$(() => {
+
+
+});

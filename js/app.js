@@ -1,4 +1,4 @@
-// Class for Player
+// --------------- Start of Class for Player ----------------------
 class Player {
   constructor(
     name,
@@ -31,7 +31,9 @@ class Player {
     );
   }
 }
-// Class for Weapon Items
+// --------------- -------End of Class for Player ----------------------
+// ======================================================================
+// ------------------- Start of Class for Weapon Items -----------------------
 class Weapon {
   constructor(name, attackPower) {
     this.name = name;
@@ -44,8 +46,9 @@ class Weapon {
     );
   }
 }
-
-// Class for Ability Items
+// ------------------- End of Class for Weapon Items -----------------------
+// ======================================================================
+// ------------------ Start of Class for Ability Items ------------------
 class Ability {
   constructor(name, abilityPower) {
     this.name = name;
@@ -58,9 +61,9 @@ class Ability {
     );
   }
 }
-
-
-// Class for Armor Items
+// ------------------ End of Class for Ability Items ------------------
+// ======================================================================
+// ------------------Start of Class for Armor Items--------------------------
 class Armor {
   constructor(name, vitality, armor) {
     this.name = name;
@@ -76,8 +79,9 @@ class Armor {
     );
   }
 }
-
-// -------------Class For Enemy---------------
+// ------------------End of Class for Armor Items--------------------------
+// ======================================================================
+// --------------------Start of Class For Enemy-----------------------------
 class Enemy {
   constructor(
     name,
@@ -121,8 +125,9 @@ class Enemy {
       this.intervalId = setInterval(()=> this.useAbilityPower(target), 5500);
   }
 }
-
-
+// -------------- End of Enemy Class -----------------
+// ======================================================================
+// ---------------- Create Player and Enemy --------------------
 let playerOne = new Player("Matt");
 let enemyOne = new Enemy("Wimpy Orc");
 let firstWeapon = new Weapon("Poopy Twig");
@@ -140,11 +145,18 @@ console.log(firstArmor);
 console.log(playerOne);
 console.log(enemyOne);
 
-//let enemyAttacks = setInterval(()=> enemyOne.startAttacking(playerOne), 1250);
-//console.log(enemyAttacks)
+
+const playerUseBasicAttack = (user, target) =>{
+  user.useBasicAttack(target)
+}
+const playerUseAbilityAttack = (user, target) =>{
+  user.useAbilityPower(target)
+}
 
 
-// Health Bars --------------------
+
+
+// ------------------Health Bars --------------------
 const getHealthBars = (player) =>{
 let getPlayerHealthPercentage =
   (player.currentHealth / player.maxVitality) * 100 + "%";
@@ -166,20 +178,22 @@ let $enemyHealthBarFill = $(".enemyHealthBarFill").css({
   width: getEnemyHealthPercentage,
 });
 }
+// ------------------Health Bars --------------------
 
-
-// phyical attack button now has a cooldown
+// -------- phyical attack button now has a cooldown ------------
 $("#playerPhysicalAttack").on("click", function () {
   let basicAttackBtn = $(this);
+  playerUseBasicAttack(playerOne, enemyOne)
   basicAttackBtn.prop("disabled", true);
   setTimeout(function () {
     basicAttackBtn.prop("disabled", false);
   }, 1000);
 });
 
-// ability attack button now has a cooldown
+//  -------------ability attack button now has a cooldown ---------------
 $("#playerAbilityAttack").on("click", function () {
   let abilityAttackBtn = $(this);
+  playerUseAbilityAttack(playerOne, enemyOne)
   abilityAttackBtn.prop("disabled", true);
   setTimeout(function () {
     abilityAttackBtn.prop("disabled", false);

@@ -5,7 +5,7 @@ div {
 #winningItems {
   position: absolute;
   height: 720px;
-  width: 960px;
+  width: 1010px;
   display: none;
   margin: 0 auto;
   background-color: blue;
@@ -16,7 +16,22 @@ div {
   color: white;
   text-align: center;
 }
+#weaponItem, #armorItem, #abilityItem {
+  height: 200px;
+  width: 200px;
+  display: inline-block;
+  margin: 100px auto;
+  margin-left: 25px;
+  padding-right: 20px;
+  left: 130px;
+  position: relative;
+  background-color: red;
+}
 
+#weaponItem:hover, #armorItem:hover, #abilityItem:hover {
+  color: rgba(255, 255, 0, 1);
+  box-shadow: 0 0 90px 20px #0ff;
+}
 
 
 #container{

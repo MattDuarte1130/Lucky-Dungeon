@@ -2,6 +2,23 @@ div {
   outline: 1px solid black;
 }
 
+#winningItems {
+  position: absolute;
+  height: 720px;
+  width: 960px;
+  display: none;
+  margin: 0 auto;
+  background-color: blue;
+  z-index: 1;
+}
+
+#winningMessage{
+  color: white;
+  text-align: center;
+}
+
+
+
 #container{
   height: 720px;
   width: 960px;
@@ -136,6 +153,8 @@ div {
   text-align: center;
   color: white;
 }
+
+
 
 body {
   background-color: lightblue;

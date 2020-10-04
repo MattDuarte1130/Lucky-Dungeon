@@ -4,7 +4,7 @@ class Player {
     name,
     maxVitality = 100,
     currentHealth,
-    attackPower = 3,
+    attackPower = 50,
     abilityPower = 10,
     armor = 2
   ) {
@@ -130,7 +130,7 @@ class Enemy {
   }
 }
 // -------------- End of Enemy Class -----------------
-// ======================================================================
+// =============================================================
 // ---------------- Create Player and Enemy --------------------
 let playerOne = new Player("Matt");
 let enemyOne = new Enemy("Wimpy Orc");
@@ -142,7 +142,7 @@ firstWeapon.boostPlayerAttack(playerOne);
 firstArmor.boostPlayerMaxVitalityAndArmor(playerOne)
 firstAbility.boostPlayerAbility(playerOne)
 
-enemyOne.startAttacking(playerOne);
+//enemyOne.startAttacking(playerOne);
 console.log(firstWeapon);
 console.log(firstAbility);
 console.log(firstArmor);
@@ -158,10 +158,12 @@ const playerUseAbilityAttack = (user, target) =>{
 }
 // ------- End of Player Attack Button Functions -----------
 
+
 // ----------- Win or lose scenario --------------
 const promptItemSelectionOrLoseScreen = (user, target) =>{
   if (target.currentHealth <= 0 && user.currentHealth > 0){
-    alert(`Congragulations! You defeated the ${target.name}. Select one of the three items displayed below!`)
+    $('#winningItems').show()
+    //alert(`Congragulations! You defeated the ${target.name}. Select one of the three items displayed below!`)
   } else if (user.currentHealth <= 0 && target.currentHealth > 0){
     alert(`Wow you got destroyed by the ${target.name}! Better luck next time.`)
   }

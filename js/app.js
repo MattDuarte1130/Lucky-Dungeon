@@ -4,8 +4,8 @@ class Player {
     name,
     maxVitality = 100,
     currentHealth,
-    attackPower = 5,
-    abilityPower = 12,
+    attackPower = 3,
+    abilityPower = 10,
     armor = 2
   ) {
     this.name = name;
@@ -17,15 +17,17 @@ class Player {
     this.interval = true;
   }
   useBasicAttack(target) {
-    getEnemyHealthBar(target)
     target.currentHealth -= this.attackPower;
+    getEnemyHealthBar(target)
+    promptItemSelectionOrLoseScreen(playerOne, enemyOne)
     console.log(
       `${this.name}'s basic attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
     );
   }
   useAbilityPower(target) {
-    getEnemyHealthBar(target)
     target.currentHealth -= this.abilityPower;
+    getEnemyHealthBar(target)
+    promptItemSelectionOrLoseScreen(playerOne, enemyOne)
     console.log(
       `${this.name}'s ability attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
     );
@@ -52,12 +54,12 @@ class Weapon {
 class Ability {
   constructor(name, abilityPower) {
     this.name = name;
-    this.abilityPower = 1 + Math.floor(Math.random() * (1 - 1 + 1));
+    this.abilityPower = 1 + Math.floor(Math.random() * (3 - 1 + 1));
   }
   boostPlayerAbility(player) {
     player.abilityPower += this.abilityPower;
     console.log(
-      `The ${this.name} boosted ${player.name}'s ability power by ${this.attackPower} points!`
+      `The ${this.name} boosted ${player.name}'s ability power by ${this.abilityPower} points!`
     );
   }
 }
@@ -100,8 +102,9 @@ class Enemy {
   }
   useBasicAttack(target) {
     if(target.currentHealth >= 0 && this.currentHealth >= 0){
-      getHealthBars(target)
       target.currentHealth -= this.attackPower;
+      promptItemSelectionOrLoseScreen(playerOne, enemyOne)
+      getHealthBars(target)
       console.log(
         `${this.name}'s basic attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
       );
@@ -111,8 +114,9 @@ class Enemy {
   }
   useAbilityPower(target) {
     if(target.currentHealth >= 0 && this.currentHealth >= 0){
-      getHealthBars(target)
       target.currentHealth -= this.abilityPower;
+      promptItemSelectionOrLoseScreen(playerOne, enemyOne)
+      getHealthBars(target)
       console.log(
         `${this.name}'s ability attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
       );
@@ -145,13 +149,25 @@ console.log(firstArmor);
 console.log(playerOne);
 console.log(enemyOne);
 
-
+// ------- Player Attack Button Functions -----------
 const playerUseBasicAttack = (user, target) =>{
   user.useBasicAttack(target)
 }
 const playerUseAbilityAttack = (user, target) =>{
   user.useAbilityPower(target)
 }
+// ------- End of Player Attack Button Functions -----------
+
+// ----------- Win or lose scenario --------------
+const promptItemSelectionOrLoseScreen = (user, target) =>{
+  if (target.currentHealth <= 0 && user.currentHealth > 0){
+    alert(`Congragulations! You defeated the ${target.name}. Select one of the three items displayed below!`)
+  } else if (user.currentHealth <= 0 && target.currentHealth > 0){
+    alert(`Wow you got destroyed by the ${target.name}! Better luck next time.`)
+  }
+}
+//promptItemSelectionOrLoseScreen(playerOne, enemyOne)
+
 
 
 

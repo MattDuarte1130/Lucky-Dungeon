@@ -134,18 +134,18 @@ class Enemy {
 // ---------------- Create Player and Enemy --------------------
 let playerOne = new Player("Matt");
 let enemyOne = new Enemy("Wimpy Orc");
-let firstWeapon = new Weapon("Poopy Twig");
-let firstArmor = new Armor("Paper Armor")
-let firstAbility = new Ability("Water Spout")
+// let rewardWeapon = new Weapon("Poopy Stick");
+// let rewardArmor = new Armor("Paper Armor")
+// let rewardAbility = new Ability("Water Bottle")
 
-firstWeapon.boostPlayerAttack(playerOne);
-firstArmor.boostPlayerMaxVitalityAndArmor(playerOne)
-firstAbility.boostPlayerAbility(playerOne)
+// rewardWeapon.boostPlayerAttack(playerOne);
+// rewardArmor.boostPlayerMaxVitalityAndArmor(playerOne)
+// rewardAbility.boostPlayerAbility(playerOne)
 
 //enemyOne.startAttacking(playerOne);
-console.log(firstWeapon);
-console.log(firstAbility);
-console.log(firstArmor);
+// console.log(firstWeapon);
+// console.log(firstAbility);
+// console.log(firstArmor);
 console.log(playerOne);
 console.log(enemyOne);
 
@@ -158,10 +158,68 @@ const playerUseAbilityAttack = (user, target) =>{
 }
 // ------- End of Player Attack Button Functions -----------
 
+// -------------------Select reward Item--------------------------
+let $rewardItemDiv = $('#rewardItem')
+let $rewardItemWeapon = $('.rewardWeapon')
+let $rewardItemArmor = $('.rewardArmor')
+let $rewardItemAbility = $('.rewardAbility')
+const createRewardItems = () =>{
+  let rewardWeapon = new Weapon("Reward Weapon",);
+  let rewardArmor = new Armor("Reward Armor")
+  let rewardAbility = new Ability("Reward Ability")
+
+  let $rewardWeaponDescription = (`${rewardWeapon.name} it contains + ${rewardWeapon.attackPower} attack power.`)
+  let $rewardArmorDescription  = (`${rewardArmor.name} it contains + ${rewardArmor.vitality} vitality and ${rewardArmor.armor} armor points.`)
+  let $rewardAbilityDescription = (`${rewardWeapon.name} it contains + ${rewardWeapon.attackPower} attack power.`)
+
+  $('.rewardWeapon').text($rewardWeaponDescription)
+  $('.rewardArmor').text($rewardArmorDescription)
+  $('.rewardAbility').text($rewardAbilityDescription)
+
+  const selectWeaponToEquip = () =>{
+    $rewardItemWeapon.on('click', (event) => {
+      const $selectedTarget = $(event.target)
+      const $selectedtargetsParent = $selectedTarget.parent()
+      $selectedtargetsParent.hide()
+      $('#itemOne').text($rewardWeaponDescription)
+      rewardWeapon.boostPlayerAttack(playerOne)
+    })
+  }
+  const selectArmorToEquip = () =>{
+    $rewardItemArmor.on('click', (event) => {
+      const $selectedTarget = $(event.target)
+      const $selectedtargetsParent = $selectedTarget.parent()
+      $selectedtargetsParent.hide()
+      $('#itemTwo').text($rewardArmorDescription)
+      rewardArmor.boostPlayerMaxVitalityAndArmor(playerOne)
+    })
+  }
+  const selectAbilityToEquip = () =>{
+    $rewardItemAbility.on('click', (event) => {
+      const $selectedTarget = $(event.target)
+      const $selectedtargetsParent = $selectedTarget.parent()
+      $selectedtargetsParent.hide()
+      $('#itemThree').text($rewardAbilityDescription)
+      rewardAbility.boostPlayerAbility(playerOne)
+    })
+  }
+  selectWeaponToEquip()
+  selectArmorToEquip()
+  selectAbilityToEquip()
+}
+
+
+// -------------------End of Select reward Item--------------------------
+
+
+
+
 
 // ----------- Win or lose scenario --------------
 const promptItemSelectionOrLoseScreen = (user, target) =>{
   if (target.currentHealth <= 0 && user.currentHealth > 0){
+    createRewardItems()
+
     $('#winningItems').show()
     //alert(`Congragulations! You defeated the ${target.name}. Select one of the three items displayed below!`)
   } else if (user.currentHealth <= 0 && target.currentHealth > 0){

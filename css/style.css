@@ -16,7 +16,7 @@ div {
   color: white;
   text-align: center;
 }
-#weaponItem, #armorItem, #abilityItem {
+#rewardItem {
   height: 200px;
   width: 200px;
   display: inline-block;
@@ -28,7 +28,7 @@ div {
   background-color: red;
 }
 
-#weaponItem:hover, #armorItem:hover, #abilityItem:hover {
+#rewardItem:hover{
   color: rgba(255, 255, 0, 1);
   box-shadow: 0 0 90px 20px #0ff;
 }

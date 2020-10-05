@@ -25,7 +25,7 @@ div {
   width: 1010px;
   display: none;
   margin: 0 auto;
-  background-color: blue;
+  background-color: rgba(0, 0, 0, .5);
   z-index: 1;
 }
 
@@ -171,16 +171,26 @@ div {
 #playerStats {
   height: 120px;
   width: 326px;
-  top: 490px;
+  top: 494px;
   position: relative;
   background: blue;
   text-align: center;
   color: white;
 }
+
+#playerAttackStats, #playerVitStats, #playerArmorStats, #playerAbilityStats{
+  text-align: left;
+  margin-top: -5px;
+}
+
+#enemyAttackStats, #enemyVitStats, #enemyArmorStats, #enemyAbilityStats{
+  text-align: left;
+  margin-top: -5px;
+}
 #enemyStats {
   height: 120px;
-  width: 324px;
-  top: 571px;
+  width: 323px;
+  top: 574px;
   position: relative;
   background: orange;
   text-align: center;

@@ -4,7 +4,7 @@ class Player {
     name,
     maxVitality = 100,
     currentHealth,
-    attackPower = 50,
+    attackPower = 5,
     abilityPower = 10,
     armor = 2
   ) {
@@ -126,15 +126,13 @@ class Enemy {
   }
   startAttacking(target){
       this.intervalId = setInterval(()=> this.useBasicAttack(target), 1250);
-      this.intervalId = setInterval(()=> this.useAbilityPower(target), 5500);
+      this.intervalId = setInterval(()=> this.useAbilityPower(target), 5250);
   }
 }
 // -------------- End of Enemy Class -----------------
 // =============================================================
-// ---------------- Create Player and Enemy --------------------
-let playerOne = new Player("Matt");
-// let currentEnemy = new Enemy("Wimpy Orc");
-// console.log(currentEnemy);
+// ---------------- Create Player--------------------
+let playerOne = new Player("King MattyIce");
 let firstWeapon = new Weapon("Poopy Stick");
 let firstArmor = new Armor("Paper Armor")
 let firstAbility = new Ability("Water Bottle")
@@ -143,11 +141,27 @@ firstWeapon.boostPlayerAttack(playerOne);
 firstArmor.boostPlayerMaxVitalityAndArmor(playerOne)
 firstAbility.boostPlayerAbility(playerOne)
 
+let $firstWeaponDescription = (`${firstWeapon.name} it contains + ${firstWeapon.attackPower} attack power.`)
+let $firstArmorDescription  = (`${firstArmor.name} it contains + ${firstArmor.vitality} vitality and ${firstArmor.armor} armor points.`)
+let $firstAbilityDescription = (`${firstAbility.name} it contains + ${firstAbility.abilityPower} ability power.`)
+$('#itemOne').append($firstWeaponDescription)
+$('#itemTwo').append($firstArmorDescription)
+$('#itemThree').append($firstAbilityDescription)
+
+// -----------------Player Stats -----------------------
+const getPlayerStats = () => {
+$('#playerAttackStats').text(`Attack Power: ${playerOne.attackPower}`)
+$('#playerVitStats').text(`Vitality: ${playerOne.maxVitality}`)
+$('#playerArmorStats').text(`Armor: ${playerOne.armor}`)
+$('#playerAbilityStats').text(`Ability Power: ${playerOne.abilityPower}`)
+}
+//--------------------- End of player stats ---------------------
+
 // currentEnemy.startAttacking(playerOne);
-console.log(firstWeapon);
-console.log(firstAbility);
-console.log(firstArmor);
-console.log(playerOne);
+// console.log(firstWeapon);
+// console.log(firstAbility);
+// console.log(firstArmor);
+// console.log(playerOne);
 // console.log(currentEnemy);
 
 
@@ -161,9 +175,9 @@ let $rewardItemAbility = $('#rewardAbility')
 
 // ------ Create reward function ------------
 const createRewardItems = () =>{
-  let rewardWeapon = new Weapon("Reward Weapon",);
-  let rewardArmor = new Armor("Reward Armor")
-  let rewardAbility = new Ability("Reward Ability")
+  let rewardWeapon = new Weapon(`${weaponNames[Math.floor(Math.random() * weaponNames.length)]}`);
+  let rewardArmor = new Armor(`${armorNames[Math.floor(Math.random() * armorNames.length)]}`)
+  let rewardAbility = new Ability(`${abilityNames[Math.floor(Math.random() * abilityNames.length)]}`)
   let $makeWeaponDiv = $('<div>').attr('id', 'rewardWeapon')
   let $makeArmorDiv = $('<div>').attr('id', 'rewardArmor')
   let $makeAbilityDiv = $('<div>').attr('id', 'rewardAbility')
@@ -194,12 +208,17 @@ rewardAbility.abilityPower = rewardAbility.abilityPower * itemStatMultiplier
       const $selectedtargetsParent = $selectedTarget.parent()
       $selectedtargetsParent.hide()
       $('#itemOne').text($rewardWeaponDescription)
-      playerOne.attackPower = 50;
+      playerOne.attackPower = 5;
       playerOne.currentHealth = playerOne.maxVitality
       rewardWeapon.boostPlayerAttack(playerOne)
       $makeWeaponDiv.remove()
       $makeArmorDiv.remove()
       $makeAbilityDiv.remove()
+      getHealthBars(playerOne)
+      $('#playerAttackStats').text(`Attack Power: ${playerOne.attackPower}`)
+      $('#playerVitStats').text(`Vitality: ${playerOne.maxVitality}`)
+      $('#playerArmorStats').text(`Armor: ${playerOne.armor}`)
+      $('#playerAbilityStats').text(`Ability Power: ${playerOne.abilityPower}`)
     })
   const selectArmorToEquip = () =>{
     $makeArmorDiv.on('click', spawnNextEnemy)
@@ -215,6 +234,11 @@ rewardAbility.abilityPower = rewardAbility.abilityPower * itemStatMultiplier
       $makeWeaponDiv.remove()
       $makeArmorDiv.remove()
       $makeAbilityDiv.remove()
+      getHealthBars(playerOne)
+      $('#playerAttackStats').text(`Attack Power: ${playerOne.attackPower}`)
+      $('#playerVitStats').text(`Vitality: ${playerOne.maxVitality}`)
+      $('#playerArmorStats').text(`Armor: ${playerOne.armor}`)
+      $('#playerAbilityStats').text(`Ability Power: ${playerOne.abilityPower}`)
     })
   const selectAbilityToEquip = () =>{
     $makeAbilityDiv.on('click', spawnNextEnemy)
@@ -229,6 +253,11 @@ rewardAbility.abilityPower = rewardAbility.abilityPower * itemStatMultiplier
       $makeWeaponDiv.remove()
       $makeArmorDiv.remove()
       $makeAbilityDiv.remove()
+      getHealthBars(playerOne)
+      $('#playerAttackStats').text(`Attack Power: ${playerOne.attackPower}`)
+      $('#playerVitStats').text(`Vitality: ${playerOne.maxVitality}`)
+      $('#playerArmorStats').text(`Armor: ${playerOne.armor}`)
+      $('#playerAbilityStats').text(`Ability Power: ${playerOne.abilityPower}`)
     })
   }
   selectAbilityToEquip()
@@ -237,7 +266,6 @@ selectArmorToEquip()
 }
 selectWeaponToEquip()
 spawnEnemyAfterItemSelection()
-
 }
 
 const spawnEnemyAfterItemSelection = () =>{
@@ -252,11 +280,11 @@ let numOfEnemiesDefeated = 0
 let enemyStatMultiplier = 1
 let itemStatMultiplier = 1
 let currentEnemy = null
-const enemyNames = ['Wimpy Orc', "Medium Orc", "Large Ugly Orc", "Green Goblin"]
+
 
 const spawnNextEnemy = () =>{
   currentEnemy = null
-  currentEnemy = new Enemy(`${enemyNames[Math.floor(Math.random() * 3)]}`)
+  currentEnemy = new Enemy(`${enemyNames[Math.floor(Math.random() * enemyNames.length)]}`)
   currentEnemy.maxVitality = currentEnemy.maxVitality * enemyStatMultiplier
   currentEnemy.currentHealth = currentEnemy.maxVitality
   currentEnemy.attackPower = currentEnemy.attackPower * enemyStatMultiplier;
@@ -264,6 +292,10 @@ const spawnNextEnemy = () =>{
   currentEnemy.armor = currentEnemy.armor * enemyStatMultiplier;
   getEnemyHealthBar(currentEnemy)
   console.log(currentEnemy)
+  $('#enemyAttackStats').text(`Attack Power: ${currentEnemy.attackPower}`)
+  $('#enemyVitStats').text(`Vitality: ${currentEnemy.maxVitality}`)
+  $('#enemyArmorStats').text(`Armor: ${currentEnemy.armor}`)
+  $('#enemyAbilityStats').text(`Ability Power: ${currentEnemy.abilityPower}`)
   currentEnemy.startAttacking(playerOne)
 }
 
@@ -272,6 +304,8 @@ $('#startGame').on('click',(event) => {
   const $selectedtargetsParent = $selectedTarget.parent()
   $selectedtargetsParent.hide()
   spawnNextEnemy()
+  getHealthBars(playerOne)
+  getPlayerStats()
   })
 
 
@@ -279,8 +313,8 @@ $('#startGame').on('click',(event) => {
 const promptItemSelectionOrLoseScreen = (user, target) =>{
   if (target.currentHealth <= 0 && user.currentHealth > 0){
     enemyStatMultiplier = enemyStatMultiplier += 0.5
-    numOfEnemiesDefeated = numOfEnemiesDefeated += 0.75
-    itemStatMultiplier = itemStatMultiplier += 1.75
+    numOfEnemiesDefeated = numOfEnemiesDefeated += 1
+    itemStatMultiplier = itemStatMultiplier += 2
     createRewardItems()
     $('#winningItems').show()
     //alert(`Congragulations! You defeated the ${target.name}. Select one of the three items displayed below!`)
@@ -343,6 +377,15 @@ $("#playerAbilityAttack").on("click", function () {
   }, 5000);
 });
 
+
+//-------------------Arrays for Item Names and enemy Names ---------------------
+const enemyNames = ['Wimpy Orc', "Medium Orc", "Large Ugly Orc", "Green Goblin", "Sneaky thief", "Evil Ninja", "Brolic Hobo", "Kanye West", "Shrek"]
+
+const weaponNames = ["Cardboard Sword", "Excalibur", "Infinty Edge", "Light Saber", "Claymore", "Huge Branch", "Cactus", "Bamboo Stick", "Twig"]
+
+const armorNames = ["Tree Bark Armor", "Iron Armor", "Gold Armor", "Gold Plated Armor", "Chain Armor", "Cloth Armor", "Steel Skirt", "Power Rangers Costume", "A real Power Rangers Costume", "Iron Man Suit", "Captain's Shield"]
+
+const abilityNames = ["Flamethrower", "Water Hose", "Power Washer", "Sprinkler", "Leaf Blower", "Blow Horn", "Charizard The Pokemon", "Water Bending Scroll", "Dragon Warrior Scroll", "Dominos Pizza Box"]
 
 
 $(() => {

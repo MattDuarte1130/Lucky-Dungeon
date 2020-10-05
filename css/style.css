@@ -1,6 +1,23 @@
 div {
   outline: 1px solid black;
 }
+#startingScreen{
+  position: absolute;
+  height: 720px;
+  width: 1010px;
+  display: show;
+  margin: 0 auto;
+  background-color: blue;
+  z-index: 2;
+}
+#startGame{
+  position: relative;
+  height: 200px;
+  width: 300px;
+  color: white;
+  background: darkred;
+  text-align: center;
+}
 
 #winningItems {
   position: absolute;
@@ -16,7 +33,7 @@ div {
   color: white;
   text-align: center;
 }
-#rewardItem {
+.rewardItem {
   height: 200px;
   width: 200px;
   display: inline-block;
@@ -28,9 +45,10 @@ div {
   background-color: red;
 }
 
-#rewardItem:hover{
+.rewardItem:hover{
   color: rgba(255, 255, 0, 1);
   box-shadow: 0 0 90px 20px #0ff;
+  cursor: pointer;
 }
 
 
@@ -119,7 +137,7 @@ div {
 .enemyContainer{
   position: relative;
   height: 600px;
-  width: 100%;
+  width: 324px%;
   margin-left: 312px;
   background: darkred;
 }

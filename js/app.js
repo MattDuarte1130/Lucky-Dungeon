@@ -19,7 +19,7 @@ class Player {
   useBasicAttack(target) {
     target.currentHealth -= this.attackPower;
     getEnemyHealthBar(target)
-    promptItemSelectionOrLoseScreen(playerOne, enemyOne)
+    promptItemSelectionOrLoseScreen(playerOne, currentEnemy)
     console.log(
       `${this.name}'s basic attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
     );
@@ -27,7 +27,7 @@ class Player {
   useAbilityPower(target) {
     target.currentHealth -= this.abilityPower;
     getEnemyHealthBar(target)
-    promptItemSelectionOrLoseScreen(playerOne, enemyOne)
+    promptItemSelectionOrLoseScreen(playerOne, currentEnemy)
     console.log(
       `${this.name}'s ability attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
     );
@@ -103,7 +103,7 @@ class Enemy {
   useBasicAttack(target) {
     if(target.currentHealth >= 0 && this.currentHealth >= 0){
       target.currentHealth -= this.attackPower;
-      promptItemSelectionOrLoseScreen(playerOne, enemyOne)
+      promptItemSelectionOrLoseScreen(playerOne, currentEnemy)
       getHealthBars(target)
       console.log(
         `${this.name}'s basic attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
@@ -115,7 +115,7 @@ class Enemy {
   useAbilityPower(target) {
     if(target.currentHealth >= 0 && this.currentHealth >= 0){
       target.currentHealth -= this.abilityPower;
-      promptItemSelectionOrLoseScreen(playerOne, enemyOne)
+      promptItemSelectionOrLoseScreen(playerOne, currentEnemy)
       getHealthBars(target)
       console.log(
         `${this.name}'s ability attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
@@ -133,104 +133,162 @@ class Enemy {
 // =============================================================
 // ---------------- Create Player and Enemy --------------------
 let playerOne = new Player("Matt");
-let enemyOne = new Enemy("Wimpy Orc");
-// let rewardWeapon = new Weapon("Poopy Stick");
-// let rewardArmor = new Armor("Paper Armor")
-// let rewardAbility = new Ability("Water Bottle")
+// let currentEnemy = new Enemy("Wimpy Orc");
+// console.log(currentEnemy);
+let firstWeapon = new Weapon("Poopy Stick");
+let firstArmor = new Armor("Paper Armor")
+let firstAbility = new Ability("Water Bottle")
 
-// rewardWeapon.boostPlayerAttack(playerOne);
-// rewardArmor.boostPlayerMaxVitalityAndArmor(playerOne)
-// rewardAbility.boostPlayerAbility(playerOne)
+firstWeapon.boostPlayerAttack(playerOne);
+firstArmor.boostPlayerMaxVitalityAndArmor(playerOne)
+firstAbility.boostPlayerAbility(playerOne)
 
-//enemyOne.startAttacking(playerOne);
-// console.log(firstWeapon);
-// console.log(firstAbility);
-// console.log(firstArmor);
+// currentEnemy.startAttacking(playerOne);
+console.log(firstWeapon);
+console.log(firstAbility);
+console.log(firstArmor);
 console.log(playerOne);
-console.log(enemyOne);
+// console.log(currentEnemy);
 
-// ------- Player Attack Button Functions -----------
-const playerUseBasicAttack = (user, target) =>{
-  user.useBasicAttack(target)
-}
-const playerUseAbilityAttack = (user, target) =>{
-  user.useAbilityPower(target)
-}
-// ------- End of Player Attack Button Functions -----------
+
 
 // -------------------Select reward Item--------------------------
-let $rewardItemDiv = $('#rewardItem')
-let $rewardItemWeapon = $('.rewardWeapon')
-let $rewardItemArmor = $('.rewardArmor')
-let $rewardItemAbility = $('.rewardAbility')
+let $rewardItemDiv = $('.rewardItem')
+let $rewardItemWeapon = $('#rewardWeapon')
+let $rewardItemArmor = $('#rewardArmor')
+let $rewardItemAbility = $('#rewardAbility')
+
+
+// ------ Create reward function ------------
 const createRewardItems = () =>{
   let rewardWeapon = new Weapon("Reward Weapon",);
   let rewardArmor = new Armor("Reward Armor")
   let rewardAbility = new Ability("Reward Ability")
+  let $makeWeaponDiv = $('<div>').attr('id', 'rewardWeapon')
+  let $makeArmorDiv = $('<div>').attr('id', 'rewardArmor')
+  let $makeAbilityDiv = $('<div>').attr('id', 'rewardAbility')
+  $makeWeaponDiv.addClass('rewardItem')
+  $makeArmorDiv.addClass('rewardItem')
+  $makeAbilityDiv.addClass('rewardItem')
+  $('#winningItems').append($makeWeaponDiv)
+  $('#winningItems').append($makeArmorDiv)
+  $('#winningItems').append($makeAbilityDiv)
+rewardWeapon.attackPower = rewardWeapon.attackPower * itemStatMultiplier
+rewardArmor.vitality = rewardArmor.vitality * itemStatMultiplier
+rewardArmor.armor = rewardArmor.armor * itemStatMultiplier
+rewardAbility.abilityPower = rewardAbility.abilityPower * itemStatMultiplier
 
   let $rewardWeaponDescription = (`${rewardWeapon.name} it contains + ${rewardWeapon.attackPower} attack power.`)
   let $rewardArmorDescription  = (`${rewardArmor.name} it contains + ${rewardArmor.vitality} vitality and ${rewardArmor.armor} armor points.`)
-  let $rewardAbilityDescription = (`${rewardWeapon.name} it contains + ${rewardWeapon.attackPower} attack power.`)
+  let $rewardAbilityDescription = (`${rewardAbility.name} it contains + ${rewardAbility.abilityPower} ability power.`)
 
-  $('.rewardWeapon').text($rewardWeaponDescription)
-  $('.rewardArmor').text($rewardArmorDescription)
-  $('.rewardAbility').text($rewardAbilityDescription)
+  $('#rewardWeapon').text($rewardWeaponDescription)
+  $('#rewardArmor').text($rewardArmorDescription)
+  $('#rewardAbility').text($rewardAbilityDescription)
+
 
   const selectWeaponToEquip = () =>{
-    $rewardItemWeapon.on('click', (event) => {
+    $makeWeaponDiv.on('click', spawnNextEnemy)
+    $makeWeaponDiv.on('click', (event) => {
       const $selectedTarget = $(event.target)
       const $selectedtargetsParent = $selectedTarget.parent()
       $selectedtargetsParent.hide()
       $('#itemOne').text($rewardWeaponDescription)
+      playerOne.attackPower = 50;
+      playerOne.currentHealth = playerOne.maxVitality
       rewardWeapon.boostPlayerAttack(playerOne)
+      $makeWeaponDiv.remove()
+      $makeArmorDiv.remove()
+      $makeAbilityDiv.remove()
     })
-  }
   const selectArmorToEquip = () =>{
-    $rewardItemArmor.on('click', (event) => {
+    $makeArmorDiv.on('click', spawnNextEnemy)
+    $makeArmorDiv.on('click', (event) => {
       const $selectedTarget = $(event.target)
       const $selectedtargetsParent = $selectedTarget.parent()
       $selectedtargetsParent.hide()
       $('#itemTwo').text($rewardArmorDescription)
+      playerOne.maxVitality = 100;
+      playerOne.armor = 2;
+      playerOne.currentHealth = playerOne.maxVitality
       rewardArmor.boostPlayerMaxVitalityAndArmor(playerOne)
+      $makeWeaponDiv.remove()
+      $makeArmorDiv.remove()
+      $makeAbilityDiv.remove()
     })
-  }
   const selectAbilityToEquip = () =>{
-    $rewardItemAbility.on('click', (event) => {
+    $makeAbilityDiv.on('click', spawnNextEnemy)
+    $makeAbilityDiv.on('click', (event) => {
       const $selectedTarget = $(event.target)
       const $selectedtargetsParent = $selectedTarget.parent()
       $selectedtargetsParent.hide()
       $('#itemThree').text($rewardAbilityDescription)
+      playerOne.abilityPower = 10;
+      playerOne.currentHealth = playerOne.maxVitality
       rewardAbility.boostPlayerAbility(playerOne)
+      $makeWeaponDiv.remove()
+      $makeArmorDiv.remove()
+      $makeAbilityDiv.remove()
     })
   }
-  selectWeaponToEquip()
-  selectArmorToEquip()
   selectAbilityToEquip()
+}
+selectArmorToEquip()
+}
+selectWeaponToEquip()
+spawnEnemyAfterItemSelection()
+
+}
+
+const spawnEnemyAfterItemSelection = () =>{
+  $(".rewardItemDiv").on('click', spawnNextEnemy)
 }
 
 
 // -------------------End of Select reward Item--------------------------
+// =====================================================================
+// ----------Round Counter and Increase New Enemy Stats -----------------
+let numOfEnemiesDefeated = 0
+let enemyStatMultiplier = 1
+let itemStatMultiplier = 1
+let currentEnemy = null
+const enemyNames = ['Wimpy Orc', "Medium Orc", "Large Ugly Orc", "Green Goblin"]
 
+const spawnNextEnemy = () =>{
+  currentEnemy = null
+  currentEnemy = new Enemy(`${enemyNames[Math.floor(Math.random() * 3)]}`)
+  currentEnemy.maxVitality = currentEnemy.maxVitality * enemyStatMultiplier
+  currentEnemy.currentHealth = currentEnemy.maxVitality
+  currentEnemy.attackPower = currentEnemy.attackPower * enemyStatMultiplier;
+  currentEnemy.abilityPower = currentEnemy.abilityPower * enemyStatMultiplier;
+  currentEnemy.armor = currentEnemy.armor * enemyStatMultiplier;
+  getEnemyHealthBar(currentEnemy)
+  console.log(currentEnemy)
+  currentEnemy.startAttacking(playerOne)
+}
 
-
+$('#startGame').on('click',(event) => {
+  const $selectedTarget = $(event.target)
+  const $selectedtargetsParent = $selectedTarget.parent()
+  $selectedtargetsParent.hide()
+  spawnNextEnemy()
+  })
 
 
 // ----------- Win or lose scenario --------------
 const promptItemSelectionOrLoseScreen = (user, target) =>{
   if (target.currentHealth <= 0 && user.currentHealth > 0){
+    enemyStatMultiplier = enemyStatMultiplier += 0.5
+    numOfEnemiesDefeated = numOfEnemiesDefeated += 0.75
+    itemStatMultiplier = itemStatMultiplier += 1.75
     createRewardItems()
-
     $('#winningItems').show()
     //alert(`Congragulations! You defeated the ${target.name}. Select one of the three items displayed below!`)
   } else if (user.currentHealth <= 0 && target.currentHealth > 0){
     alert(`Wow you got destroyed by the ${target.name}! Better luck next time.`)
   }
 }
-//promptItemSelectionOrLoseScreen(playerOne, enemyOne)
-
-
-
-
+//promptItemSelectionOrLoseScreen(playerOne, currentEnemy)
 
 // ------------------Health Bars --------------------
 const getHealthBars = (player) =>{
@@ -256,10 +314,19 @@ let $enemyHealthBarFill = $(".enemyHealthBarFill").css({
 }
 // ------------------Health Bars --------------------
 
+// ------- Player Attack Button Functions -----------
+const playerUseBasicAttack = (user, target) =>{
+  user.useBasicAttack(target)
+}
+const playerUseAbilityAttack = (user, target) =>{
+  user.useAbilityPower(target)
+}
+// ------- End of Player Attack Button Functions -----------
+
 // -------- phyical attack button now has a cooldown ------------
 $("#playerPhysicalAttack").on("click", function () {
   let basicAttackBtn = $(this);
-  playerUseBasicAttack(playerOne, enemyOne)
+  playerUseBasicAttack(playerOne, currentEnemy)
   basicAttackBtn.prop("disabled", true);
   setTimeout(function () {
     basicAttackBtn.prop("disabled", false);
@@ -269,14 +336,15 @@ $("#playerPhysicalAttack").on("click", function () {
 //  -------------ability attack button now has a cooldown ---------------
 $("#playerAbilityAttack").on("click", function () {
   let abilityAttackBtn = $(this);
-  playerUseAbilityAttack(playerOne, enemyOne)
+  playerUseAbilityAttack(playerOne, currentEnemy)
   abilityAttackBtn.prop("disabled", true);
   setTimeout(function () {
     abilityAttackBtn.prop("disabled", false);
   }, 5000);
 });
 
-$(() => {
 
+
+$(() => {
 
 });

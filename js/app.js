@@ -4,9 +4,9 @@ class Player {
     name,
     maxVitality = 100,
     currentHealth,
-    attackPower = 5,
-    abilityPower = 10,
-    healing = 2
+    attackPower = 10,
+    abilityPower = 15,
+    healing = 7
   ) {
     this.name = name;
     this.maxVitality = maxVitality;
@@ -32,9 +32,11 @@ class Player {
     );
   }
   useHealPower(user){
-    if(this.currentHealth < (this.maxVitality -= this.healing)){
+    if((this.currentHealth + this.healing) < this.maxVitality){
     this.currentHealth += this.healing
-    }
+  } else {
+    this.currentHealth = this.maxVitality
+  }
 }
 }
 // --------------- -------End of Class for Player ----------------------
@@ -43,7 +45,7 @@ class Player {
 class Weapon {
   constructor(name, attackPower) {
     this.name = name;
-    this.attackPower = 2 + Math.floor(Math.random() * (2 - 1 + 1));
+    this.attackPower = 2 + Math.floor(Math.random() * (5 - 2 + 1));
   }
   boostPlayerAttack(player) {
     player.attackPower += this.attackPower;
@@ -58,7 +60,7 @@ class Weapon {
 class Ability {
   constructor(name, abilityPower) {
     this.name = name;
-    this.abilityPower = 1 + Math.floor(Math.random() * (3 - 1 + 1));
+    this.abilityPower = 2 + Math.floor(Math.random() * (7 - 2 + 1));
   }
   boostPlayerAbility(player) {
     player.abilityPower += this.abilityPower;
@@ -73,8 +75,8 @@ class Ability {
 class Armor {
   constructor(name, vitality, healing) {
     this.name = name;
-    this.vitality = 9 + Math.floor(Math.random() * (9 - 1 + 1));
-    this.healing = 4 + Math.floor(Math.random() * (4 - 1 + 1));
+    this.vitality = 5 + Math.floor(Math.random() * (15 - 5 + 1));
+    this.healing = 4 + Math.floor(Math.random() * (11 - 4 + 1));
   }
   boostPlayerMaxVitalityAndHealing(player) {
     player.maxVitality += this.vitality;
@@ -100,9 +102,9 @@ class Enemy {
     this.name = name;
     this.maxVitality = maxVitality;
     this.currentHealth = maxVitality;
-    this.attackPower = 2 + Math.floor(Math.random() * (5 - 2 + 1));
-    this.abilityPower = 10 + Math.floor(Math.random() * (10 - 7 + 1));
-    this.healing = 1 + Math.floor(Math.random() * (3 - 1 + 1));
+    this.attackPower = 7 + Math.floor(Math.random() * (10 - 7 + 1));
+    this.abilityPower = 10 + Math.floor(Math.random() * (17 - 10 + 1));
+    this.healing = 8 + Math.floor(Math.random() * (15 - 8 + 1));
   }
   useBasicAttack(target) {
     if (target.currentHealth >= 0 && this.currentHealth >= 0) {
@@ -139,14 +141,14 @@ class Enemy {
   }
   startAttacking(target) {
     this.intervalId = setInterval(() => this.useBasicAttack(target), 1250);
-    this.intervalId = setInterval(() => this.useAbilityPower(target), 5250);
+    this.intervalId = setInterval(() => this.useAbilityPower(target), 5500);
     this.intervalId = setInterval(() => this.useHealPower(target), 10000);
   }
 }
 // -------------- End of Enemy Class -----------------
 // =============================================================
 // ---------------- Create Player--------------------
-let playerOne = new Player("King MattyIce");
+let playerOne = new Player("Dark Knight Matt");
 let firstWeapon = new Weapon("Poopy Stick");
 let firstArmor = new Armor("Paper armor");
 let firstAbility = new Ability("Water Bottle");
@@ -219,8 +221,8 @@ const createRewardItems = () => {
   $("#rewardAbility").text($rewardAbilityDescription);
 
   const selectWeaponToEquip = () => {
-    $makeWeaponDiv.on("click", spawnNextEnemy);
-    $makeWeaponDiv.on("click", (event) => {
+    $makeWeaponDiv.one("click", spawnNextEnemy);
+    $makeWeaponDiv.one("click", (event) => {
       const $selectedTarget = $(event.target);
       const $selectedtargetsParent = $selectedTarget.parent();
       $selectedtargetsParent.hide();
@@ -235,8 +237,8 @@ const createRewardItems = () => {
       getPlayerStats();
     });
     const selectArmorToEquip = () => {
-      $makeArmorDiv.on("click", spawnNextEnemy);
-      $makeArmorDiv.on("click", (event) => {
+      $makeArmorDiv.one("click", spawnNextEnemy);
+      $makeArmorDiv.one("click", (event) => {
         const $selectedTarget = $(event.target);
         const $selectedtargetsParent = $selectedTarget.parent();
         $selectedtargetsParent.hide();
@@ -252,8 +254,8 @@ const createRewardItems = () => {
         getPlayerStats();
       });
       const selectAbilityToEquip = () => {
-        $makeAbilityDiv.on("click", spawnNextEnemy);
-        $makeAbilityDiv.on("click", (event) => {
+        $makeAbilityDiv.one("click", spawnNextEnemy);
+        $makeAbilityDiv.one("click", (event) => {
           const $selectedTarget = $(event.target);
           const $selectedtargetsParent = $selectedTarget.parent();
           $selectedtargetsParent.hide();
@@ -277,7 +279,7 @@ const createRewardItems = () => {
 };
 
 const spawnEnemyAfterItemSelection = () => {
-  $(".rewardItemDiv").on("click", spawnNextEnemy);
+  $(".rewardItemDiv").one("click", spawnNextEnemy);
 };
 
 // -------------------End of Select reward Item--------------------------
@@ -288,7 +290,13 @@ let enemyStatMultiplier = 1;
 let itemStatMultiplier = 1;
 let currentEnemy = null;
 
+const roundCounterDisplay = () =>{
+  $("#numOfEnimiesDefeatedDisplay").text(`Enemies Defeated: ${numOfEnemiesDefeated}`)
+}
+
 const spawnNextEnemy = () => {
+  resetPlayerCoolDowns()
+  roundCounterDisplay()
   currentEnemy = null;
   currentEnemy = new Enemy(
     `${enemyNames[Math.floor(Math.random() * enemyNames.length)]}`
@@ -321,7 +329,7 @@ const promptItemSelectionOrLoseScreen = (user, target) => {
   if (target.currentHealth <= 0 && user.currentHealth > 0) {
     enemyStatMultiplier += 0.5;
     numOfEnemiesDefeated++;
-    itemStatMultiplier += 2;
+    itemStatMultiplier += 1.5;
     createRewardItems();
     $("#winningItems").show();
     //alert(`Congragulations! You defeated the ${target.name}. Select one of the three items displayed below!`)
@@ -341,7 +349,7 @@ const getHealthBars = (player) => {
     player.currentHealth + "/" + player.maxVitality
   );
   let $playerHealthBarFill = $(".healthBarFill").css({
-    width: getPlayerHealthPercentage,
+    width: getPlayerHealthPercentage
   });
 };
 
@@ -366,6 +374,9 @@ const playerUseAbilityAttack = (user, target) => {
 };
 const playerUseHealingAbility = (user) =>{
   user.useHealPower()
+}
+const resetPlayerCoolDowns = () =>{
+  $('.playerBtn').prop('disabled', false);
 }
 // ------- End of Player Attack Button Functions -----------
 
@@ -406,11 +417,25 @@ const enemyNames = [
   "Medium Orc",
   "Large Ugly Orc",
   "Green Goblin",
-  "Sneaky thief",
+  "Sneaky Thief",
   "Evil Ninja",
   "Brolic Hobo",
   "Kanye West",
   "Shrek",
+  "The Joker",
+  "Thanos",
+  "Diablo",
+  "Federal Taxes",
+  "Covid-19",
+  "Too Many Carbs",
+  "Enemy With A Bad Name",
+  "Dr. Doofenshmirtz",
+  "Wario",
+  "Waluigi",
+  "Gary",
+  "Gym Leader",
+  "Akatsuki Member",
+  "Madara",
 ];
 
 const weaponNames = [
@@ -434,7 +459,6 @@ const armorNames = [
   "Cloth Armor",
   "Steel Skirt",
   "Power Rangers Costume",
-  "A real Power Rangers Costume",
   "Iron Man Suit",
   "Captain's Shield",
 ];

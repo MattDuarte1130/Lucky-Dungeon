@@ -63,6 +63,12 @@ div {
   left: 226px;
   margin: 0 auto;
 }
+#numOfEnimiesDefeatedDisplay{
+  position: absolute;
+  text-align: center;
+  color: white;
+  left: 350px;
+}
 
 /* Health Bars */
 .playerHealthBar {
@@ -76,6 +82,7 @@ div {
   height: 100%;
   width: 100%;
   background: #59ea63;
+  transition: width 0.5s;
 }
 
 .healthBarValue{
@@ -100,6 +107,7 @@ div {
   height: 100%;
   width: 100%;
   background: #ff3300;
+  transition: width 0.5s;
 }
 
 .enemyHealthBarValue{

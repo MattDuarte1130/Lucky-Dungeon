@@ -3,8 +3,8 @@ div {
 }
 #startingScreen{
   position: absolute;
-  height: 720px;
-  width: 1010px;
+  height: 100%;
+  width: 100%;
   display: show;
   margin: 0 auto;
   background-color: blue;
@@ -12,20 +12,23 @@ div {
 }
 #startGame{
   position: relative;
+  top: 200px;
   height: 200px;
   width: 300px;
   color: white;
+  margin: 0 auto;
   background: darkred;
   text-align: center;
 }
 
 #winningItems {
   position: absolute;
-  height: 720px;
-  width: 1010px;
+  height: 600px;
+  width: 962px;
   display: none;
+  left: 227px;
   margin: 0 auto;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, .8);
   z-index: 1;
 }
 
@@ -53,10 +56,11 @@ div {
 
 
 #container{
+  position: absolute;
   height: 720px;
   width: 960px;
   display: flex;
-  top: 50px;
+  left: 226px;
   margin: 0 auto;
 }
 
@@ -119,7 +123,7 @@ div {
   position: relative;
   height: 80px;
   width: 80px;
-  top: 480px;
+  top: 420px;
   border-radius: 50%;
   left: 150px;
   cursor: pointer;
@@ -142,7 +146,14 @@ div {
   background: darkred;
 }
 
-
+#enemyName{
+  text-align: center;
+  color: white;
+}
+#playerName{
+  text-align: center;
+  color: white;
+}
 
 
 #itemContainer {
@@ -171,7 +182,7 @@ div {
 #playerStats {
   height: 120px;
   width: 326px;
-  top: 494px;
+  top: 430px;
   position: relative;
   background: blue;
   text-align: center;
@@ -190,7 +201,7 @@ div {
 #enemyStats {
   height: 120px;
   width: 323px;
-  top: 574px;
+  top: 508px;
   position: relative;
   background: orange;
   text-align: center;

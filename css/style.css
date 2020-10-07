@@ -1,5 +1,8 @@
 div {
-  outline: 1px solid black;
+  outline: 1px rgba(255, 0, 0, 0);
+}
+body {
+  font-family: 'Signika', sans-serif;
 }
 #startingScreen{
   position: absolute;
@@ -10,7 +13,18 @@ div {
   background-color: blue;
   z-index: 2;
 }
-#startGame{
+
+#losingScreen{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: none;
+  margin: 0 auto;
+  background-color: red;
+  z-index: 3;
+}
+
+#loseScreen{
   position: relative;
   top: 200px;
   height: 200px;
@@ -20,13 +34,105 @@ div {
   background: darkred;
   text-align: center;
 }
+#restartGame{
+  position: absolute;
+  top: 410px;
+  left: 620px;
+  height: 70px;
+  width: 100px;
+  color: white;
+  margin: 0 auto;
+  background: darkred;
+  text-align: center;
+	cursor: pointer;
+  font-family: 'Signika', sans-serif;
+  border-radius: 20px;
+}
+
+#numOfDefeated{
+  background-color: rgba(255, 0, 0, 0);
+  left: 460px;
+  top: 150px;
+}
+
+#startGame{
+  position: relative;
+  top: 200px;
+  height: 200px;
+  width: 300px;
+  color: white;
+  margin: 0 auto;
+  background: darkred;
+  text-align: center;
+  cursor: pointer;
+}
+
+#modal {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  overflow: auto;
+  display: none;
+}
+
+#modal-textbox {
+  background-color: white;
+  height: 350px;
+  width: 550px;
+  border-radius: 2px;
+  margin: 150px auto;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  padding: 2%;
+  line-height: 120%;
+}
+
+#modal-footer {
+	text-align: right;
+  font-family: 'Signika', sans-serif;
+}
+
+#modalTitle {
+	padding-bottom: 15px;
+  text-align: center;
+  font-family: 'Signika', sans-serif;
+}
+
+#openModal {
+  position: absolute;
+  top: 410px;
+  left: 620px;
+  height: 70px;
+  width: 100px;
+  color: white;
+  margin: 0 auto;
+  background: darkred;
+  text-align: center;
+	cursor: pointer;
+  font-family: 'Signika', sans-serif;
+  border-radius: 20px;
+}
+
+#close{
+  padding: 14px 18px;
+	background: darkred;
+	border: none;
+	outline: none;
+	color: white;
+	cursor: pointer;
+  font-family: 'Signika', sans-serif;
+  border-radius: 20px;
+}
 
 #winningItems {
   position: absolute;
   height: 600px;
-  width: 962px;
+  width: 972px;
   display: none;
-  left: 227px;
+  left: 226px;
   margin: 0 auto;
   background-color: rgba(0, 0, 0, .8);
   z-index: 1;
@@ -35,6 +141,8 @@ div {
 #winningMessage{
   color: white;
   text-align: center;
+  padding-left: 5px;
+  padding-top: 5px;
 }
 .rewardItem {
   height: 200px;
@@ -42,10 +150,13 @@ div {
   display: inline-block;
   margin: 100px auto;
   margin-left: 25px;
-  padding-right: 20px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 5px;
   left: 130px;
   position: relative;
   background-color: red;
+
 }
 
 .rewardItem:hover{
@@ -63,11 +174,15 @@ div {
   left: 226px;
   margin: 0 auto;
 }
-#numOfEnimiesDefeatedDisplay{
+.numOfEnimiesDefeatedDisplay{
   position: absolute;
+  width: 324px;
+  height: 32px;
   text-align: center;
+  top: -20px;
   color: white;
-  left: 350px;
+  left: 324px;
+  background-color: black;
 }
 
 /* Health Bars */
@@ -142,15 +257,38 @@ div {
   font-size: 13px;
 }
 
-#playerPhysicalAttack:focus, #playerAbilityAttack:focus, #playerHealAbility:focus{
+#playerPhysicalAttack:focus, #playerAbilityAttack:focus, #playerHealAbility:focus, #openModal:focus, #close:focus, #restartGame:focus{
   outline: 0;
 }
 
+.combatLogContainer{
+  position: absolute;
+  top: 30px;
+  height: 570px;
+  width: 324px;
+  left: 324px;
+  background: darkgrey;
+  z-index: -1;
+}
+.combatLog{
+  text-align: left;
+  line-height: normal;
+  padding-left: 7px;
+  padding-right: 5px;
+}
+
+#logPlayerBasicAttack, #logPlayerAbilityAttack, #logPlayerHealAbility{
+  color: green;
+}
+#logEnemyBasicAttack, #logEnemyHealAbility, #logEnemyAbilityAttack{
+  color: red;
+}
+
 .enemyContainer{
-  position: relative;
+  position: absolute;
   height: 600px;
-  width: 324px%;
-  margin-left: 312px;
+  width: 324px;
+  left: 648px;
   background: darkred;
 }
 
@@ -166,16 +304,18 @@ div {
 
 #itemContainer {
   height: 120px;
-  width: 310px;
+  width: 324px;
   top: 600px;
+  left: 324px;
   display: flex;
-  position: relative;
-  right: 632px;
+  position: absolute;
 }
 
 #itemOne, #itemTwo, #itemThree{
   height: 120px;
-  width: 103px;
+  width: 110px;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 #itemOne{
   background: yellow;
@@ -190,7 +330,7 @@ div {
 #playerStats {
   height: 120px;
   width: 326px;
-  top: 428px;
+  top: 400px;
   position: relative;
   background: blue;
   text-align: center;
@@ -199,17 +339,21 @@ div {
 
 #playerAttackStats, #playerVitStats, #playerArmorStats, #playerAbilityStats{
   text-align: left;
-  margin-top: -5px;
+  padding-top: 5px;
+  line-height: 50%;
+  top: 10px;
 }
 
 #enemyAttackStats, #enemyVitStats, #enemyArmorStats, #enemyAbilityStats{
   text-align: left;
-  margin-top: -5px;
+  padding-top: 5px;
+  line-height: normal;
+  line-height: 50%;
 }
 #enemyStats {
   height: 120px;
   width: 323px;
-  top: 508px;
+  top: 498px;
   position: relative;
   background: orange;
   text-align: center;

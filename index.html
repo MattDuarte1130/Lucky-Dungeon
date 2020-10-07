@@ -8,10 +8,38 @@
       integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
       crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@500&display=swap');
+</style>
   </head>
   <body>
     <div id="startingScreen">
-      <div id="startGame">Press me to start!</div>
+      <div class="startGame" id="startGame">Press me to start!</div>
+      <button class="modal-buttons" id="openModal">How to play</button>
+      <div id="modal">
+      <div id="modal-textbox">
+        <h1 id="modalTitle">How to play Lucky Dungeon</h1>
+        <p>
+          Bridge is played with four people sitting at a card table using a
+          standard deck of 52 cards (no jokers). The players across from each
+          other form partnerships as North‑South and East‑West.
+        </p>
+        <p>
+          Draw cards to select the person to deal the cards (the dealer). This
+          person distributes the cards face down, in clockwise rotation one at a
+          time, until each player at the table has a hand consisting of 13
+          cards.
+        </p>
+        <p>
+          After the play of each deal is completed, the opportunity to deal
+          moves around the table clockwise so that each person has a turn to
+          deal out the cards.
+        </p>
+        <div id="modal-footer">
+          <button class="modal-buttons" id="close" href="#">Close</button>
+        </div>
+      </div>
+    </div>
     </div>
 
     <div id="winningItems">
@@ -21,8 +49,14 @@
       <div id="rewardAbility" class="rewardItem"></div> -->
     </div>
 
+<div id="losingScreen">
+  <h2 class="numOfEnimiesDefeatedDisplay" id="numOfDefeated">Enemies Defeated</h2>
+  <div id="loseScreen"></div>
+  <button id="restartGame" onClick="window.location.href=window.location.href">Try Again!</button>
+</div>
+
 <div id="container">
-  <h2 id="numOfEnimiesDefeatedDisplay">Enemies Defeated</h2>
+  <h2 class="numOfEnimiesDefeatedDisplay">Enemies Defeated</h2>
 
 <div class="playerOneContainer">
   <!-- Player Health Bar -->
@@ -41,7 +75,14 @@
     <h4 id="playerAbilityStats">test</h4>
   </div>
 </div>
-
+<div class="combatLogContainer">
+  <p class="combatLog" id="logPlayerBasicAttack"></p>
+  <p class="combatLog" id="logPlayerAbilityAttack"></p>
+  <p class="combatLog" id="logPlayerHealAbility"></p>
+  <p class="combatLog" id="logEnemyBasicAttack"></p>
+  <p class="combatLog" id="logEnemyAbilityAttack"></p>
+  <p class="combatLog" id="logEnemyHealAbility"></p>
+</div>
 <div class="enemyContainer">
   <!-- Enemy Health Bar -->
 <div class="enemyHealthBar">

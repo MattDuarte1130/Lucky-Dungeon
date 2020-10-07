@@ -19,23 +19,27 @@ class Player {
     target.currentHealth -= this.attackPower;
     getEnemyHealthBar(target);
     promptItemSelectionOrLoseScreen(playerOne, currentEnemy);
-    console.log(
-      `${this.name}'s basic attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
-    );
+    $('#logPlayerBasicAttack').text(`${this.name}'s basic attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`)
   }
   useAbilityPower(target) {
     target.currentHealth -= this.abilityPower;
     getEnemyHealthBar(target);
     promptItemSelectionOrLoseScreen(playerOne, currentEnemy);
-    console.log(
+    $('#logPlayerAbilityAttack').text(
       `${this.name}'s ability attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
     );
   }
   useHealPower(user){
     if((this.currentHealth + this.healing) < this.maxVitality){
     this.currentHealth += this.healing
+    $('#logPlayerHealAbility').text(
+      `${this.name} healed and HP is now at ${this.currentHealth}!`
+    );
   } else {
     this.currentHealth = this.maxVitality
+    $('#logPlayerHealAbility').text(
+      `${this.name} healed and HP is now at ${this.currentHealth}!`
+    );
   }
 }
 }
@@ -49,9 +53,6 @@ class Weapon {
   }
   boostPlayerAttack(player) {
     player.attackPower += this.attackPower;
-    console.log(
-      `The ${this.name} boosted ${player.name}'s attack power by ${this.attackPower}!`
-    );
   }
 }
 // ------------------- End of Class for Weapon Items -----------------------
@@ -64,9 +65,6 @@ class Ability {
   }
   boostPlayerAbility(player) {
     player.abilityPower += this.abilityPower;
-    console.log(
-      `The ${this.name} boosted ${player.name}'s ability power by ${this.abilityPower} points!`
-    );
   }
 }
 // ------------------ End of Class for Ability Items ------------------
@@ -82,9 +80,6 @@ class Armor {
     player.maxVitality += this.vitality;
     player.healing += this.healing;
     player.currentHealth += this.vitality;
-    console.log(
-      `The ${this.name} boosted ${player.name}'s max vitality by ${this.vitality} points and ${player.name}'s healing by ${this.healing} points!`
-    );
   }
 }
 // ------------------End of Class for healing Items--------------------------
@@ -102,16 +97,16 @@ class Enemy {
     this.name = name;
     this.maxVitality = maxVitality;
     this.currentHealth = maxVitality;
-    this.attackPower = 7 + Math.floor(Math.random() * (10 - 7 + 1));
-    this.abilityPower = 10 + Math.floor(Math.random() * (17 - 10 + 1));
-    this.healing = 8 + Math.floor(Math.random() * (15 - 8 + 1));
+    this.attackPower = 5 + Math.floor(Math.random() * (10 - 5 + 1));
+    this.abilityPower = 8 + Math.floor(Math.random() * (17 - 8 + 1));
+    this.healing = 6 + Math.floor(Math.random() * (15 - 6 + 1));
   }
   useBasicAttack(target) {
     if (target.currentHealth >= 0 && this.currentHealth >= 0) {
       target.currentHealth -= this.attackPower;
       promptItemSelectionOrLoseScreen(playerOne, currentEnemy);
       getHealthBars(target);
-      console.log(
+      $('#logEnemyBasicAttack').text(
         `${this.name}'s basic attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
       );
     } else {
@@ -123,7 +118,7 @@ class Enemy {
       target.currentHealth -= this.abilityPower;
       promptItemSelectionOrLoseScreen(playerOne, currentEnemy);
       getHealthBars(target);
-      console.log(
+      $('#logEnemyAbilityAttack').text(
         `${this.name}'s ability attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
       );
     } else {
@@ -133,6 +128,8 @@ class Enemy {
   useHealPower(target){
     if (target.currentHealth >= 0 && this.currentHealth >= 0) {
       this.currentHealth += this.healing;
+      $('#logEnemyHealAbility').text(
+        `${this.name} healed and HP is now at ${this.currentHealth}!`);
       getEnemyHealthBar(currentEnemy)
       promptItemSelectionOrLoseScreen(playerOne, currentEnemy);
     } else {
@@ -148,7 +145,7 @@ class Enemy {
 // -------------- End of Enemy Class -----------------
 // =============================================================
 // ---------------- Create Player--------------------
-let playerOne = new Player("Dark Knight Matt");
+let playerOne = new Player("Player Juan");
 let firstWeapon = new Weapon("Poopy Stick");
 let firstArmor = new Armor("Paper armor");
 let firstAbility = new Ability("Water Bottle");
@@ -291,10 +288,11 @@ let itemStatMultiplier = 1;
 let currentEnemy = null;
 
 const roundCounterDisplay = () =>{
-  $("#numOfEnimiesDefeatedDisplay").text(`Enemies Defeated: ${numOfEnemiesDefeated}`)
+  $(".numOfEnimiesDefeatedDisplay").text(`Enemies Defeated: ${numOfEnemiesDefeated}`)
 }
 
 const spawnNextEnemy = () => {
+  $('.combatLog').text('')
   resetPlayerCoolDowns()
   roundCounterDisplay()
   currentEnemy = null;
@@ -334,9 +332,7 @@ const promptItemSelectionOrLoseScreen = (user, target) => {
     $("#winningItems").show();
     //alert(`Congragulations! You defeated the ${target.name}. Select one of the three items displayed below!`)
   } else if (user.currentHealth <= 0 && target.currentHealth > 0) {
-    alert(
-      `Wow you got destroyed by the ${target.name}! Better luck next time.`
-    );
+    $('#losingScreen').show()
   }
 };
 //promptItemSelectionOrLoseScreen(playerOne, currentEnemy)
@@ -476,4 +472,16 @@ const abilityNames = [
   "Dominos Pizza Box",
 ];
 
-$(() => {});
+$(() => {
+const $openBtn = $('#openModal');
+const $modal = $('#modal');
+const $closeBtn = $('#close');
+const openModal = () => {
+  $modal.css('display', 'block');
+}
+const closeModal = () => {
+  $modal.css('display', 'none');
+}
+$openBtn.on('click', openModal);
+$closeBtn.on('click', closeModal);
+});

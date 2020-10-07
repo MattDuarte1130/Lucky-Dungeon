@@ -81,7 +81,7 @@ body {
 
 #modal-textbox {
   background-color: white;
-  height: 350px;
+  height: 450px;
   width: 550px;
   border-radius: 2px;
   margin: 150px auto;
@@ -134,15 +134,15 @@ body {
   display: none;
   left: 226px;
   margin: 0 auto;
-  background-color: rgba(0, 0, 0, .8);
-  z-index: 1;
+  background-color: rgba(0, 0, 0, 1);
+  z-index: 2;
 }
 
 #winningMessage{
   color: white;
   text-align: center;
-  padding-left: 5px;
-  padding-top: 5px;
+  padding-left: 25px;
+  padding-top: 25px;
 }
 .rewardItem {
   height: 200px;
@@ -261,7 +261,7 @@ body {
   outline: 0;
 }
 
-.combatLogContainer{
+.middleContainer{
   position: absolute;
   top: 30px;
   height: 570px;
@@ -276,11 +276,59 @@ body {
   padding-left: 7px;
   padding-right: 5px;
 }
-
-#logPlayerBasicAttack, #logPlayerAbilityAttack, #logPlayerHealAbility{
-  color: green;
+#logPlayerAbilityAttack{
+  position: absolute;
+  font-size: 32px;
+  left: 800px;
+  top: 120px;
+  z-index: 1;
+  font-weight: bold;
 }
-#logEnemyBasicAttack, #logEnemyHealAbility, #logEnemyAbilityAttack{
+#logPlayerBasicAttack{
+  position: absolute;
+  font-size: 32px;
+  left: 750px;
+  top: 160px;
+  z-index: 1;
+  font-weight: bold;
+}
+#logPlayerHealAbility{
+  position: absolute;
+  font-size: 32px;
+  left: 50px;
+  top: 100px;
+  z-index: 1;
+  font-weight: bold;
+}
+#logEnemyBasicAttack{
+  position: absolute;
+  font-size: 32px;
+  left: 140px;
+  top: 130px;
+  z-index: 1;
+  font-weight: bold;
+}
+#logEnemyAbilityAttack{
+  position: absolute;
+  font-size: 32px;
+  left: 80px;
+  top: 170px;
+  z-index: 1;
+  font-weight: bold;
+}
+#logEnemyHealAbility{
+  position: absolute;
+  font-size: 32px;
+  left: 720px;
+  top: 80px;
+  z-index: 1;
+  font-weight: bold;
+}
+
+#logEnemyHealAbility, #logPlayerHealAbility{
+  color: limegreen;
+}
+#logEnemyBasicAttack, #logEnemyAbilityAttack, #logPlayerBasicAttack, #logPlayerAbilityAttack, #logEnemyBasicAttack{
   color: red;
 }
 
@@ -330,7 +378,7 @@ body {
 #playerStats {
   height: 120px;
   width: 326px;
-  top: 400px;
+  top: 399px;
   position: relative;
   background: blue;
   text-align: center;
@@ -339,16 +387,17 @@ body {
 
 #playerAttackStats, #playerVitStats, #playerArmorStats, #playerAbilityStats{
   text-align: left;
-  padding-top: 5px;
-  line-height: 50%;
-  top: 10px;
+  padding-top: 8px;
+  line-height: 30%;
+  padding-left: 10px;
 }
 
 #enemyAttackStats, #enemyVitStats, #enemyArmorStats, #enemyAbilityStats{
   text-align: left;
-  padding-top: 5px;
+  padding-top: 8px;
+  padding-left: 12px;
   line-height: normal;
-  line-height: 50%;
+  line-height: 30%;
 }
 #enemyStats {
   height: 120px;
@@ -358,6 +407,7 @@ body {
   background: orange;
   text-align: center;
   color: white;
+
 }
 
 

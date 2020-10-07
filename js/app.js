@@ -19,27 +19,31 @@ class Player {
     target.currentHealth -= this.attackPower;
     getEnemyHealthBar(target);
     promptItemSelectionOrLoseScreen(playerOne, currentEnemy);
-    $('#logPlayerBasicAttack').text(`${this.name}'s basic attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`)
+    $('#logPlayerBasicAttack').text(`-${this.attackPower}`);
+    setTimeout(function(){$('#logPlayerBasicAttack').text("")}, 900)
   }
   useAbilityPower(target) {
     target.currentHealth -= this.abilityPower;
     getEnemyHealthBar(target);
     promptItemSelectionOrLoseScreen(playerOne, currentEnemy);
     $('#logPlayerAbilityAttack').text(
-      `${this.name}'s ability attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
+      `-${this.abilityPower}`
     );
+    setTimeout(function(){$('#logPlayerAbilityAttack').text("")}, 1000)
   }
   useHealPower(user){
     if((this.currentHealth + this.healing) < this.maxVitality){
     this.currentHealth += this.healing
     $('#logPlayerHealAbility').text(
-      `${this.name} healed and HP is now at ${this.currentHealth}!`
+      `+${this.healing}`
     );
+    setTimeout(function(){$('#logPlayerHealAbility').text("")}, 1000)
   } else {
     this.currentHealth = this.maxVitality
     $('#logPlayerHealAbility').text(
-      `${this.name} healed and HP is now at ${this.currentHealth}!`
+      `+${this.healing}`
     );
+    setTimeout(function(){$('#logPlayerHealAbility').text("")}, 1000)
   }
 }
 }
@@ -102,50 +106,56 @@ class Enemy {
     this.healing = 6 + Math.floor(Math.random() * (15 - 6 + 1));
   }
   useBasicAttack(target) {
-    if (target.currentHealth >= 0 && this.currentHealth >= 0) {
+    if (target.currentHealth > 0 && this.currentHealth > 0) {
       target.currentHealth -= this.attackPower;
       promptItemSelectionOrLoseScreen(playerOne, currentEnemy);
       getHealthBars(target);
       $('#logEnemyBasicAttack').text(
-        `${this.name}'s basic attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
+        `-${this.attackPower}`
       );
+      console.log('attack')
+      setTimeout(function(){$('#logEnemyBasicAttack').text("")}, 900)
     } else {
       clearInterval(this.intervalId);
     }
   }
   useAbilityPower(target) {
-    if (target.currentHealth >= 0 && this.currentHealth >= 0) {
+    if (target.currentHealth > 0 && this.currentHealth > 0) {
       target.currentHealth -= this.abilityPower;
       promptItemSelectionOrLoseScreen(playerOne, currentEnemy);
       getHealthBars(target);
       $('#logEnemyAbilityAttack').text(
-        `${this.name}'s ability attack hit! ${target.name}'s HP is now at ${target.currentHealth}!`
+        `-${this.abilityPower}`
       );
+      console.log('Abilityattack')
+      setTimeout(function(){$('#logEnemyAbilityAttack').text("")}, 1000)
     } else {
       clearInterval(this.intervalId);
     }
   }
   useHealPower(target){
-    if (target.currentHealth >= 0 && this.currentHealth >= 0) {
+    if (target.currentHealth > 0 && this.currentHealth > 0) {
       this.currentHealth += this.healing;
       $('#logEnemyHealAbility').text(
-        `${this.name} healed and HP is now at ${this.currentHealth}!`);
+        `+${this.healing}`);
+        setTimeout(function(){$('#logEnemyHealAbility').text("")}, 1000)
       getEnemyHealthBar(currentEnemy)
       promptItemSelectionOrLoseScreen(playerOne, currentEnemy);
+      console.log('heal')
     } else {
       clearInterval(this.intervalId);
     }
   }
   startAttacking(target) {
     this.intervalId = setInterval(() => this.useBasicAttack(target), 1250);
-    this.intervalId = setInterval(() => this.useAbilityPower(target), 5500);
-    this.intervalId = setInterval(() => this.useHealPower(target), 10000);
+    this.intervalId = setInterval(() => this.useAbilityPower(target), 3500);
+    this.intervalId = setInterval(() => this.useHealPower(target), 5500);
   }
 }
 // -------------- End of Enemy Class -----------------
 // =============================================================
 // ---------------- Create Player--------------------
-let playerOne = new Player("Player Juan");
+let playerOne = new Player("Lucky Hero");
 let firstWeapon = new Weapon("Poopy Stick");
 let firstArmor = new Armor("Paper armor");
 let firstAbility = new Ability("Water Bottle");
@@ -293,7 +303,6 @@ const roundCounterDisplay = () =>{
 
 const spawnNextEnemy = () => {
   $('.combatLog').text('')
-  resetPlayerCoolDowns()
   roundCounterDisplay()
   currentEnemy = null;
   currentEnemy = new Enemy(
@@ -393,7 +402,7 @@ $("#playerAbilityAttack").on("click", function () {
   abilityAttackBtn.prop("disabled", true);
   setTimeout(function () {
     abilityAttackBtn.prop("disabled", false);
-  }, 5000);
+  }, 3000);
 });
 
 //-----------------Heal ability button ---------------------------
@@ -404,7 +413,7 @@ $("#playerHealAbility").on("click", function () {
   useHealBtn.prop("disabled", true);
   setTimeout(function () {
     useHealBtn.prop("disabled", false);
-  }, 10000);
+  }, 5000);
 });
 
 //-------------------Arrays for Item Names and enemy Names ---------------------

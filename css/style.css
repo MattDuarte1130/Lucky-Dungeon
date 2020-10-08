@@ -1,16 +1,13 @@
 div {
   outline: 1px rgba(255, 0, 0, 0);
 }
-body {
-  font-family: 'Signika', sans-serif;
-}
 #startingScreen{
   position: absolute;
   height: 100%;
   width: 100%;
   display: show;
   margin: 0 auto;
-  background-color: blue;
+  background-image: url('img/Texture.png');
   z-index: 2;
 }
 
@@ -27,16 +24,16 @@ body {
 #loseScreen{
   position: relative;
   top: 200px;
-  height: 200px;
-  width: 300px;
+  height: 400px;
+  width: 600px;
   color: white;
   margin: 0 auto;
-  background: darkred;
+  background-image: url('img/losescreen.png');
   text-align: center;
 }
 #restartGame{
   position: absolute;
-  top: 410px;
+  top: 610px;
   left: 620px;
   height: 70px;
   width: 100px;
@@ -44,7 +41,7 @@ body {
   margin: 0 auto;
   background: darkred;
   text-align: center;
-	cursor: pointer;
+  cursor: pointer;
   font-family: 'Signika', sans-serif;
   border-radius: 20px;
 }
@@ -58,13 +55,13 @@ body {
 #startGame{
   position: relative;
   top: 200px;
-  height: 200px;
-  width: 300px;
+  height: 400px;
+  width: 600px;
   color: white;
   margin: 0 auto;
-  background: darkred;
   text-align: center;
   cursor: pointer;
+  background-image: url("img/pressStart.png");
 }
 
 #modal {
@@ -103,7 +100,7 @@ body {
 
 #openModal {
   position: absolute;
-  top: 410px;
+  top: 610px;
   left: 620px;
   height: 70px;
   width: 100px;
@@ -134,7 +131,7 @@ body {
   display: none;
   left: 226px;
   margin: 0 auto;
-  background-color: rgba(0, 0, 0, 1);
+  background-image: url('img/dungeonTexture.png');
   z-index: 2;
 }
 
@@ -145,24 +142,23 @@ body {
   padding-top: 25px;
 }
 .rewardItem {
-  height: 200px;
+  height: 300px;
   width: 200px;
   display: inline-block;
   margin: 100px auto;
   margin-left: 25px;
-  padding-right: 5px;
-  padding-left: 5px;
-  padding-top: 5px;
   left: 130px;
   position: relative;
-  background-color: red;
+  background-image: url('img/itemReward.png');
+  background-repeat: no-repeat;
 
 }
 
 .rewardItem:hover{
   color: rgba(255, 255, 0, 1);
-  box-shadow: 0 0 90px 20px #0ff;
+  box-shadow: 0 0 90px 10px #FFD700;
   cursor: pointer;
+
 }
 
 
@@ -173,6 +169,7 @@ body {
   display: flex;
   left: 226px;
   margin: 0 auto;
+  background: rgba(0,0,0,0)
 }
 .numOfEnimiesDefeatedDisplay{
   position: absolute;
@@ -239,7 +236,7 @@ body {
   position: relative;
   height: 600px;
   width: 324px;
-  background: green;
+  background-image: url('img/player.png');
 }
 
 #playerPhysicalAttack, #playerAbilityAttack, #playerHealAbility {
@@ -267,7 +264,7 @@ body {
   height: 570px;
   width: 324px;
   left: 324px;
-  background: darkgrey;
+  background: rgba(0, 0, 0, 0);
   z-index: -1;
 }
 .combatLog{
@@ -337,7 +334,8 @@ body {
   height: 600px;
   width: 324px;
   left: 648px;
-  background: darkred;
+  background: rgba(0,0,0,0);
+  background-image: url(img/devilGame.png);
 }
 
 #enemyName{
@@ -366,13 +364,13 @@ body {
   padding-right: 2px;
 }
 #itemOne{
-  background: yellow;
+  background-image: url('img/itembox.png');
 }
 #itemTwo{
-  background: green;
+  background-image: url('img/itembox.png');
 }
 #itemThree{
-  background: red;
+  background-image: url('img/itembox.png');
 }
 
 #playerStats {
@@ -380,7 +378,7 @@ body {
   width: 326px;
   top: 399px;
   position: relative;
-  background: blue;
+  background-image: url('img/stats.png');
   text-align: center;
   color: white;
 }
@@ -404,7 +402,7 @@ body {
   width: 323px;
   top: 498px;
   position: relative;
-  background: orange;
+  background-image: url('img/stats.png');
   text-align: center;
   color: white;
 
@@ -413,5 +411,6 @@ body {
 
 
 body {
-  background-color: lightblue;
+  font-family: 'Signika', sans-serif;
+  background-image: url('img/dungeonTexture.png');
 }

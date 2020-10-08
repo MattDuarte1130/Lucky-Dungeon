@@ -77,7 +77,7 @@ class Ability {
 class Armor {
   constructor(name, vitality, healing) {
     this.name = name;
-    this.vitality = 5 + Math.floor(Math.random() * (15 - 5 + 1));
+    this.vitality = 8 + Math.floor(Math.random() * (18 - 8 + 1));
     this.healing = 4 + Math.floor(Math.random() * (11 - 4 + 1));
   }
   boostPlayerMaxVitalityAndHealing(player) {
@@ -102,7 +102,7 @@ class Enemy {
     this.maxVitality = maxVitality;
     this.currentHealth = maxVitality;
     this.attackPower = 5 + Math.floor(Math.random() * (10 - 5 + 1));
-    this.abilityPower = 8 + Math.floor(Math.random() * (17 - 8 + 1));
+    this.abilityPower = 6 + Math.floor(Math.random() * (15 - 6 + 1));
     this.healing = 6 + Math.floor(Math.random() * (15 - 6 + 1));
   }
   useBasicAttack(target) {
@@ -113,7 +113,6 @@ class Enemy {
       $('#logEnemyBasicAttack').text(
         `-${this.attackPower}`
       );
-      console.log('attack')
       setTimeout(function(){$('#logEnemyBasicAttack').text("")}, 900)
     } else {
       clearInterval(this.intervalId);
@@ -127,7 +126,6 @@ class Enemy {
       $('#logEnemyAbilityAttack').text(
         `-${this.abilityPower}`
       );
-      console.log('Abilityattack')
       setTimeout(function(){$('#logEnemyAbilityAttack').text("")}, 1000)
     } else {
       clearInterval(this.intervalId);
@@ -141,7 +139,6 @@ class Enemy {
         setTimeout(function(){$('#logEnemyHealAbility').text("")}, 1000)
       getEnemyHealthBar(currentEnemy)
       promptItemSelectionOrLoseScreen(playerOne, currentEnemy);
-      console.log('heal')
     } else {
       clearInterval(this.intervalId);
     }

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>First Game</title>
+    <title>Lucky Dungeon</title>
     <script
       src="https://code.jquery.com/jquery-3.2.1.min.js"
       integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -57,7 +57,7 @@
   <button id="restartGame" onClick="window.location.href=window.location.href">Try Again!</button>
 </div>
 
-<div id="container">
+<div id="container" class="containerGame">
   <h2 class="numOfEnimiesDefeatedDisplay">Enemies Defeated</h2>
 
 <div class="playerOneContainer">
@@ -71,22 +71,22 @@
   <button id="playerAbilityAttack" class="playerBtn">Ability Attack</button>
   <button id="playerHealAbility" class="playerBtn">Healing Ability</button>
   <div id= "playerStats">
-    <h4 id="playerAttackStats">test</h4>
-    <h4 id="playerVitStats">test</h4>
-    <h4 id="playerArmorStats">test</h4>
-    <h4 id="playerAbilityStats">test</h4>
+    <h4 id="playerAttackStats"></h4>
+    <h4 id="playerVitStats"></h4>
+    <h4 id="playerArmorStats"></h4>
+    <h4 id="playerAbilityStats"></h4>
   </div>
 </div>
 <div class="middleContainer">
 
 </div>
 <div class="displayAttackPoints">
-  <p class="combatLog" id="logPlayerBasicAttack">Player BA</p>
-  <p class="combatLog" id="logPlayerAbilityAttack">Player AA</p>
-  <p class="combatLog" id="logPlayerHealAbility">Player Heal</p>
-  <p class="combatLog" id="logEnemyBasicAttack">Enemy BA</p>
-  <p class="combatLog" id="logEnemyAbilityAttack">Enemy AA</p>
-  <p class="combatLog" id="logEnemyHealAbility">Enemy Heal</p>
+  <p class="combatLog" id="logPlayerBasicAttack"></p>
+  <p class="combatLog" id="logPlayerAbilityAttack"></p>
+  <p class="combatLog" id="logPlayerHealAbility"></p>
+  <p class="combatLog" id="logEnemyBasicAttack"></p>
+  <p class="combatLog" id="logEnemyAbilityAttack"></p>
+  <p class="combatLog" id="logEnemyHealAbility"></p>
 </div>
 <div class="enemyContainer">
   <!-- Enemy Health Bar -->
@@ -96,17 +96,27 @@
   </div>
   <h2 id="enemyName"></h2>
   <div id= "enemyStats">
-    <h4 id="enemyAttackStats">test</h4>
-    <h4 id="enemyVitStats">test</h4>
-    <h4 id="enemyArmorStats">test</h4>
-    <h4 id="enemyAbilityStats">test</h4>
+    <h4 id="enemyAttackStats"></h4>
+    <h4 id="enemyVitStats"></h4>
+    <h4 id="enemyArmorStats"></h4>
+    <h4 id="enemyAbilityStats"></h4>
   </div>
 </div>
 
   <div id="itemContainer">
-    <div id="itemOne"></div>
-    <div id="itemTwo"></div>
-    <div id="itemThree"></div>
+    <div id="itemOne">
+    <h2 id="itemBoxWeaponName"></h2>
+    <p id="itemBoxWeaponDescription"></p>
+    </div>
+    <div id="itemTwo">
+    <h2 id="itemBoxArmorName"></h2>
+    <p id="itemBoxArmorDescription"></p>
+    <p id="itemBoxArmorDescription2"></p>
+    </div>
+    <div id="itemThree">
+    <h2 id="itemBoxAbilityName"></h2>
+    <p id="itemBoxAbilityDescription"></p>
+    </div>
   </div>
 
 

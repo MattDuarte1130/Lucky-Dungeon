@@ -7,7 +7,7 @@ div {
   width: 100%;
   display: show;
   margin: 0 auto;
-  background-image: url('img/Texture.png');
+  background: rgba(255, 0, 0, 0);
   z-index: 2;
 }
 
@@ -17,17 +17,17 @@ div {
   width: 100%;
   display: none;
   margin: 0 auto;
-  background-color: red;
+  background: rgba(255, 0, 0, 0);
   z-index: 3;
 }
 
 #loseScreen{
-  position: relative;
+  position: absolute;
   top: 200px;
   height: 400px;
   width: 600px;
-  color: white;
-  margin: 0 auto;
+  color: black;
+  left: 390px;
   background-image: url('img/losescreen.png');
   text-align: center;
 }
@@ -37,9 +37,9 @@ div {
   left: 620px;
   height: 70px;
   width: 100px;
-  color: white;
+  color: black;
   margin: 0 auto;
-  background: darkred;
+  background: darkgreen;
   text-align: center;
   cursor: pointer;
   font-family: 'Signika', sans-serif;
@@ -53,11 +53,12 @@ div {
 }
 
 #startGame{
-  position: relative;
+  position: absolute;
   top: 200px;
   height: 400px;
   width: 600px;
-  color: white;
+  left: 390px;
+  color: black;
   margin: 0 auto;
   text-align: center;
   cursor: pointer;
@@ -77,7 +78,8 @@ div {
 }
 
 #modal-textbox {
-  background-color: white;
+  background-image: url("img/modalbg.png");
+  background-size: cover;
   height: 450px;
   width: 550px;
   border-radius: 2px;
@@ -104,9 +106,9 @@ div {
   left: 620px;
   height: 70px;
   width: 100px;
-  color: white;
+  color: black;
   margin: 0 auto;
-  background: darkred;
+  background: darkgreen;
   text-align: center;
 	cursor: pointer;
   font-family: 'Signika', sans-serif;
@@ -115,10 +117,10 @@ div {
 
 #close{
   padding: 14px 18px;
-	background: darkred;
+	background: darkgreen;
 	border: none;
 	outline: none;
-	color: white;
+	color: black;
 	cursor: pointer;
   font-family: 'Signika', sans-serif;
   border-radius: 20px;
@@ -131,7 +133,7 @@ div {
   display: none;
   left: 226px;
   margin: 0 auto;
-  background-image: url('img/dungeonTexture.png');
+  background-image: url('img/itemBG.png');
   z-index: 2;
 }
 
@@ -139,26 +141,56 @@ div {
   color: white;
   text-align: center;
   padding-left: 25px;
+  padding-right: 25px;
   padding-top: 25px;
+  font-size: 28px;
+  text-shadow: 2px 2px 4px darkgreen;
 }
 .rewardItem {
   height: 300px;
   width: 200px;
-  display: inline-block;
-  margin: 100px auto;
+  float: left;
+  margin: 50px auto;
   margin-left: 25px;
-  left: 130px;
+  left: 140px;
   position: relative;
   background-image: url('img/itemReward.png');
   background-repeat: no-repeat;
+  text-shadow: 2px 2px 4px darkgreen;
+  color:white;
+}
+#rewardWeapon{
+  background-image: url('img/weaponScoll.png');
+  background-repeat: no-repeat;
+  text-align: center;
 
+}
+#rewardArmor{
+  background-image: url('img/armorScroll.png');
+  background-repeat: no-repeat;
+  text-align: center;
+
+
+}
+#rewardAbility{
+  background-image: url('img/abilityscroll.png');
+  background-repeat: no-repeat;
+  text-align: center;
+
+}
+
+#weaponName, #armorName, #abilityName {
+  padding-top: 8px;
+}
+#weaponDescription, #armorDescription, #armorDescription2, #abilityDescription{
+  font-size: 20px;
+  line-height: 65%;
 }
 
 .rewardItem:hover{
   color: rgba(255, 255, 0, 1);
   box-shadow: 0 0 90px 10px #FFD700;
   cursor: pointer;
-
 }
 
 
@@ -166,11 +198,13 @@ div {
   position: absolute;
   height: 720px;
   width: 960px;
-  display: flex;
   left: 226px;
   margin: 0 auto;
-  background: rgba(0,0,0,0)
+  background: rgba(0,0,0,0);
+  display: flex
 }
+
+
 .numOfEnimiesDefeatedDisplay{
   position: absolute;
   width: 324px;
@@ -179,7 +213,8 @@ div {
   top: -20px;
   color: white;
   left: 324px;
-  background-color: black;
+  background-color: rgba(0,0,0,0);
+  text-shadow: 2px 2px 4px darkgreen;
 }
 
 /* Health Bars */
@@ -187,7 +222,7 @@ div {
   position: relative;
   width: 100%;
   height: 30px;
-  background: grey;
+  background: darkgrey;
 }
 
 .healthBarFill{
@@ -195,6 +230,7 @@ div {
   width: 100%;
   background: #59ea63;
   transition: width 0.5s;
+
 }
 
 .healthBarValue{
@@ -211,7 +247,7 @@ div {
   position: relative;
   width: 100%;
   height: 30px;
-  background: grey;
+  background: darkgrey;
 
 }
 
@@ -220,6 +256,7 @@ div {
   width: 100%;
   background: #ff3300;
   transition: width 0.5s;
+
 }
 
 .enemyHealthBarValue{
@@ -324,9 +361,11 @@ div {
 
 #logEnemyHealAbility, #logPlayerHealAbility{
   color: limegreen;
+  text-shadow: 2px 2px black;
 }
 #logEnemyBasicAttack, #logEnemyAbilityAttack, #logPlayerBasicAttack, #logPlayerAbilityAttack, #logEnemyBasicAttack{
   color: red;
+  text-shadow: 2px 2px black;
 }
 
 .enemyContainer{
@@ -341,10 +380,12 @@ div {
 #enemyName{
   text-align: center;
   color: white;
+  text-shadow: 2px 2px 4px red;
 }
 #playerName{
   text-align: center;
   color: white;
+  text-shadow: 2px 2px 4px darkgreen;
 }
 
 
@@ -362,15 +403,27 @@ div {
   width: 110px;
   padding-left: 2px;
   padding-right: 2px;
+  color: white;
+  text-shadow: 2px 2px 4px darkgreen;
 }
 #itemOne{
-  background-image: url('img/itembox.png');
+  background-image: url('img/itemBoxWeap.png');
 }
 #itemTwo{
-  background-image: url('img/itembox.png');
+  background-image: url('img/itemBoxArmor.png');
 }
 #itemThree{
-  background-image: url('img/itembox.png');
+  background-image: url('img/itemBoxAbi.png');
+}
+#itemBoxWeaponName, #itemBoxAbilityName, #itemBoxArmorName{
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+}
+#itemBoxWeaponDescription, #itemBoxArmorDescription, #itemBoxAbilityDescription, #itemBoxArmorDescription2{
+  margin-top: -10px;
+  text-align: center;
+
 }
 
 #playerStats {
@@ -379,21 +432,22 @@ div {
   top: 399px;
   position: relative;
   background-image: url('img/stats.png');
-  text-align: center;
+
   color: white;
+  text-shadow: 2px 2px 4px darkgreen;
 }
 
 #playerAttackStats, #playerVitStats, #playerArmorStats, #playerAbilityStats{
-  text-align: left;
+  text-align: center;
   padding-top: 8px;
   line-height: 30%;
   padding-left: 10px;
 }
 
 #enemyAttackStats, #enemyVitStats, #enemyArmorStats, #enemyAbilityStats{
-  text-align: left;
+  text-align: center;
   padding-top: 8px;
-  padding-left: 12px;
+  padding-left: 10px;
   line-height: normal;
   line-height: 30%;
 }
@@ -403,8 +457,8 @@ div {
   top: 498px;
   position: relative;
   background-image: url('img/stats.png');
-  text-align: center;
   color: white;
+  text-shadow: 2px 2px 4px red;
 
 }
 

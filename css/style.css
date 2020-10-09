@@ -1,7 +1,7 @@
 div {
   outline: 1px rgba(255, 0, 0, 0);
 }
-#startingScreen{
+#startingScreen {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -11,7 +11,7 @@ div {
   z-index: 2;
 }
 
-#losingScreen{
+#losingScreen {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -21,17 +21,17 @@ div {
   z-index: 3;
 }
 
-#loseScreen{
+#loseScreen {
   position: absolute;
   top: 200px;
   height: 400px;
   width: 600px;
   color: black;
   left: 390px;
-  background-image: url('img/losescreen.png');
+  background-image: url("img/losescreen.png");
   text-align: center;
 }
-#restartGame{
+#restartGame {
   position: absolute;
   top: 610px;
   left: 620px;
@@ -42,17 +42,17 @@ div {
   background: darkgreen;
   text-align: center;
   cursor: pointer;
-  font-family: 'Signika', sans-serif;
+  font-family: "Signika", sans-serif;
   border-radius: 20px;
 }
 
-#numOfDefeated{
+#numOfDefeated {
   background-color: rgba(255, 0, 0, 0);
-  left: 460px;
+  left: 490px;
   top: 150px;
 }
 
-#startGame{
+#startGame {
   position: absolute;
   top: 200px;
   height: 400px;
@@ -90,14 +90,14 @@ div {
 }
 
 #modal-footer {
-	text-align: right;
-  font-family: 'Signika', sans-serif;
+  text-align: right;
+  font-family: "Signika", sans-serif;
 }
 
 #modalTitle {
-	padding-bottom: 15px;
+  padding-bottom: 15px;
   text-align: center;
-  font-family: 'Signika', sans-serif;
+  font-family: "Signika", sans-serif;
 }
 
 #openModal {
@@ -110,19 +110,19 @@ div {
   margin: 0 auto;
   background: darkgreen;
   text-align: center;
-	cursor: pointer;
-  font-family: 'Signika', sans-serif;
+  cursor: pointer;
+  font-family: "Signika", sans-serif;
   border-radius: 20px;
 }
 
-#close{
+#close {
   padding: 14px 18px;
-	background: darkgreen;
-	border: none;
-	outline: none;
-	color: black;
-	cursor: pointer;
-  font-family: 'Signika', sans-serif;
+  background: darkgreen;
+  border: none;
+  outline: none;
+  color: black;
+  cursor: pointer;
+  font-family: "Signika", sans-serif;
   border-radius: 20px;
 }
 
@@ -133,11 +133,11 @@ div {
   display: none;
   left: 226px;
   margin: 0 auto;
-  background-image: url('img/itemBG.png');
+  background-image: url("img/itemBG.png");
   z-index: 2;
 }
 
-#winningMessage{
+#winningMessage {
   color: white;
   text-align: center;
   padding-left: 25px;
@@ -154,58 +154,57 @@ div {
   margin-left: 25px;
   left: 140px;
   position: relative;
-  background-image: url('img/itemReward.png');
+  background-image: url("img/itemReward.png");
   background-repeat: no-repeat;
   text-shadow: 2px 2px 4px darkgreen;
-  color:white;
+  color: white;
 }
-#rewardWeapon{
-  background-image: url('img/weaponScoll.png');
+#rewardWeapon {
+  background-image: url("img/weaponScoll.png");
   background-repeat: no-repeat;
   text-align: center;
-
 }
-#rewardArmor{
-  background-image: url('img/armorScroll.png');
+#rewardArmor {
+  background-image: url("img/armorScroll.png");
   background-repeat: no-repeat;
   text-align: center;
-
-
 }
-#rewardAbility{
-  background-image: url('img/abilityscroll.png');
+#rewardAbility {
+  background-image: url("img/abilityscroll.png");
   background-repeat: no-repeat;
   text-align: center;
-
 }
 
-#weaponName, #armorName, #abilityName {
+#weaponName,
+#armorName,
+#abilityName {
   padding-top: 8px;
 }
-#weaponDescription, #armorDescription, #armorDescription2, #abilityDescription{
+#weaponDescription,
+#armorDescription,
+#armorDescription2,
+#abilityDescription {
   font-size: 20px;
   line-height: 65%;
 }
 
-.rewardItem:hover{
+.rewardItem:hover {
   color: rgba(255, 255, 0, 1);
-  box-shadow: 0 0 90px 10px #FFD700;
+  box-shadow: 0 0 90px 10px #ffd700;
   cursor: pointer;
 }
 
-
-#container{
+#container {
   position: absolute;
   height: 720px;
   width: 960px;
   left: 226px;
   margin: 0 auto;
-  background: rgba(0,0,0,0);
-  display: flex
+  background: rgba(0, 0, 0, 0);
+  display: flex;
 }
 
-
-.numOfEnimiesDefeatedDisplay{
+.numOfEnimiesDefeatedDisplay {
   position: absolute;
   width: 324px;
   height: 32px;
@@ -213,7 +212,7 @@ div {
   top: -20px;
   color: white;
   left: 324px;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   text-shadow: 2px 2px 4px darkgreen;
 }
 
@@ -225,15 +224,14 @@ div {
   background: darkgrey;
 }
 
-.healthBarFill{
+.healthBarFill {
   height: 100%;
   width: 100%;
   background: #59ea63;
   transition: width 0.5s;
-
 }
 
-.healthBarValue{
+.healthBarValue {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -248,18 +246,16 @@ div {
   width: 100%;
   height: 30px;
   background: darkgrey;
-
 }
 
-.enemyHealthBarFill{
+.enemyHealthBarFill {
   height: 100%;
   width: 100%;
   background: #ff3300;
   transition: width 0.5s;
-
 }
 
-.enemyHealthBarValue{
+.enemyHealthBarValue {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -269,14 +265,16 @@ div {
   font-weight: bold;
 }
 
-.playerOneContainer{
+.playerOneContainer {
   position: relative;
   height: 600px;
   width: 324px;
-  background-image: url('img/player.png');
+  background-image: url("img/player.png");
 }
 
-#playerPhysicalAttack, #playerAbilityAttack, #playerHealAbility {
+#playerPhysicalAttack,
+#playerAbilityAttack,
+#playerHealAbility {
   position: relative;
   height: 80px;
   width: 80px;
@@ -287,15 +285,22 @@ div {
   font-size: 15px;
 }
 
-#playerPhysicalAttack:active, #playerAbilityAttack:active, #playerHealAbility:active{
+#playerPhysicalAttack:active,
+#playerAbilityAttack:active,
+#playerHealAbility:active {
   font-size: 13px;
 }
 
-#playerPhysicalAttack:focus, #playerAbilityAttack:focus, #playerHealAbility:focus, #openModal:focus, #close:focus, #restartGame:focus{
+#playerPhysicalAttack:focus,
+#playerAbilityAttack:focus,
+#playerHealAbility:focus,
+#openModal:focus,
+#close:focus,
+#restartGame:focus {
   outline: 0;
 }
 
-.middleContainer{
+.middleContainer {
   position: absolute;
   top: 30px;
   height: 570px;
@@ -304,13 +309,13 @@ div {
   background: rgba(0, 0, 0, 0);
   z-index: -1;
 }
-.combatLog{
+.combatLog {
   text-align: left;
   line-height: normal;
   padding-left: 7px;
   padding-right: 5px;
 }
-#logPlayerAbilityAttack{
+#logPlayerAbilityAttack {
   position: absolute;
   font-size: 32px;
   left: 800px;
@@ -318,7 +323,7 @@ div {
   z-index: 1;
   font-weight: bold;
 }
-#logPlayerBasicAttack{
+#logPlayerBasicAttack {
   position: absolute;
   font-size: 32px;
   left: 750px;
@@ -326,7 +331,7 @@ div {
   z-index: 1;
   font-weight: bold;
 }
-#logPlayerHealAbility{
+#logPlayerHealAbility {
   position: absolute;
   font-size: 32px;
   left: 50px;
@@ -334,7 +339,7 @@ div {
   z-index: 1;
   font-weight: bold;
 }
-#logEnemyBasicAttack{
+#logEnemyBasicAttack {
   position: absolute;
   font-size: 32px;
   left: 140px;
@@ -342,7 +347,7 @@ div {
   z-index: 1;
   font-weight: bold;
 }
-#logEnemyAbilityAttack{
+#logEnemyAbilityAttack {
   position: absolute;
   font-size: 32px;
   left: 80px;
@@ -350,7 +355,7 @@ div {
   z-index: 1;
   font-weight: bold;
 }
-#logEnemyHealAbility{
+#logEnemyHealAbility {
   position: absolute;
   font-size: 32px;
   left: 720px;
@@ -359,35 +364,39 @@ div {
   font-weight: bold;
 }
 
-#logEnemyHealAbility, #logPlayerHealAbility{
+#logEnemyHealAbility,
+#logPlayerHealAbility {
   color: limegreen;
   text-shadow: 2px 2px black;
 }
-#logEnemyBasicAttack, #logEnemyAbilityAttack, #logPlayerBasicAttack, #logPlayerAbilityAttack, #logEnemyBasicAttack{
+#logEnemyBasicAttack,
+#logEnemyAbilityAttack,
+#logPlayerBasicAttack,
+#logPlayerAbilityAttack,
+#logEnemyBasicAttack {
   color: red;
   text-shadow: 2px 2px black;
 }
 
-.enemyContainer{
+.enemyContainer {
   position: absolute;
   height: 600px;
   width: 324px;
   left: 648px;
-  background: rgba(0,0,0,0);
+  background: rgba(0, 0, 0, 0);
   background-image: url(img/devilGame.png);
 }
 
-#enemyName{
+#enemyName {
   text-align: center;
   color: white;
   text-shadow: 2px 2px 4px red;
 }
-#playerName{
+#playerName {
   text-align: center;
   color: white;
   text-shadow: 2px 2px 4px darkgreen;
 }
-
 
 #itemContainer {
   height: 120px;
@@ -398,7 +407,9 @@ div {
   position: absolute;
 }
 
-#itemOne, #itemTwo, #itemThree{
+#itemOne,
+#itemTwo,
+#itemThree {
   height: 120px;
   width: 110px;
   padding-left: 2px;
@@ -406,24 +417,28 @@ div {
   color: white;
   text-shadow: 2px 2px 4px darkgreen;
 }
-#itemOne{
-  background-image: url('img/itemBoxWeap.png');
+#itemOne {
+  background-image: url("img/itemBoxWeap.png");
 }
-#itemTwo{
-  background-image: url('img/itemBoxArmor.png');
+#itemTwo {
+  background-image: url("img/itemBoxArmor.png");
 }
-#itemThree{
-  background-image: url('img/itemBoxAbi.png');
+#itemThree {
+  background-image: url("img/itemBoxAbi.png");
 }
-#itemBoxWeaponName, #itemBoxAbilityName, #itemBoxArmorName{
+#itemBoxWeaponName,
+#itemBoxAbilityName,
+#itemBoxArmorName {
   font-size: 16px;
   text-align: center;
   font-weight: bold;
 }
-#itemBoxWeaponDescription, #itemBoxArmorDescription, #itemBoxAbilityDescription, #itemBoxArmorDescription2{
+#itemBoxWeaponDescription,
+#itemBoxArmorDescription,
+#itemBoxAbilityDescription,
+#itemBoxArmorDescription2 {
   margin-top: -10px;
   text-align: center;
-
 }
 
 #playerStats {
@@ -431,20 +446,26 @@ div {
   width: 326px;
   top: 399px;
   position: relative;
-  background-image: url('img/stats.png');
+  background-image: url("img/stats.png");
 
   color: white;
   text-shadow: 2px 2px 4px darkgreen;
 }
 
-#playerAttackStats, #playerVitStats, #playerArmorStats, #playerAbilityStats{
+#playerAttackStats,
+#playerVitStats,
+#playerArmorStats,
+#playerAbilityStats {
   text-align: center;
   padding-top: 8px;
   line-height: 30%;
   padding-left: 10px;
 }
 
-#enemyAttackStats, #enemyVitStats, #enemyArmorStats, #enemyAbilityStats{
+#enemyAttackStats,
+#enemyVitStats,
+#enemyArmorStats,
+#enemyAbilityStats {
   text-align: center;
   padding-top: 8px;
   padding-left: 10px;
@@ -456,15 +477,12 @@ div {
   width: 323px;
   top: 498px;
   position: relative;
-  background-image: url('img/stats.png');
+  background-image: url("img/stats.png");
   color: white;
   text-shadow: 2px 2px 4px red;
-
 }
 
-
-
 body {
-  font-family: 'Signika', sans-serif;
-  background-image: url('img/dungeonTexture.png');
+  font-family: "Signika", sans-serif;
+  background-image: url("img/dungeonTexture.png");
 }

@@ -19,33 +19,35 @@ class Player {
     target.currentHealth -= this.attackPower;
     getEnemyHealthBar(target);
     promptItemSelectionOrLoseScreen(playerOne, currentEnemy);
-    $('#logPlayerBasicAttack').text(`-${this.attackPower}`);
-    setTimeout(function(){$('#logPlayerBasicAttack').text("")}, 900)
+    $("#logPlayerBasicAttack").text(`-${this.attackPower}`);
+    setTimeout(function () {
+      $("#logPlayerBasicAttack").text("");
+    }, 900);
   }
   useAbilityPower(target) {
     target.currentHealth -= this.abilityPower;
     getEnemyHealthBar(target);
     promptItemSelectionOrLoseScreen(playerOne, currentEnemy);
-    $('#logPlayerAbilityAttack').text(
-      `-${this.abilityPower}`
-    );
-    setTimeout(function(){$('#logPlayerAbilityAttack').text("")}, 1000)
+    $("#logPlayerAbilityAttack").text(`-${this.abilityPower}`);
+    setTimeout(function () {
+      $("#logPlayerAbilityAttack").text("");
+    }, 1000);
   }
-  useHealPower(user){
-    if((this.currentHealth + this.healing) < this.maxVitality){
-    this.currentHealth += this.healing
-    $('#logPlayerHealAbility').text(
-      `+${this.healing}`
-    );
-    setTimeout(function(){$('#logPlayerHealAbility').text("")}, 1000)
-  } else {
-    this.currentHealth = this.maxVitality
-    $('#logPlayerHealAbility').text(
-      `+${this.healing}`
-    );
-    setTimeout(function(){$('#logPlayerHealAbility').text("")}, 1000)
+  useHealPower(user) {
+    if (this.currentHealth + this.healing < this.maxVitality) {
+      this.currentHealth += this.healing;
+      $("#logPlayerHealAbility").text(`+${this.healing}`);
+      setTimeout(function () {
+        $("#logPlayerHealAbility").text("");
+      }, 1000);
+    } else {
+      this.currentHealth = this.maxVitality;
+      $("#logPlayerHealAbility").text(`+${this.healing}`);
+      setTimeout(function () {
+        $("#logPlayerHealAbility").text("");
+      }, 1000);
+    }
   }
-}
 }
 // --------------- -------End of Class for Player ----------------------
 // ======================================================================
@@ -110,10 +112,10 @@ class Enemy {
       target.currentHealth -= this.attackPower;
       promptItemSelectionOrLoseScreen(playerOne, currentEnemy);
       getHealthBars(target);
-      $('#logEnemyBasicAttack').text(
-        `-${this.attackPower}`
-      );
-      setTimeout(function(){$('#logEnemyBasicAttack').text("")}, 900)
+      $("#logEnemyBasicAttack").text(`-${this.attackPower}`);
+      setTimeout(function () {
+        $("#logEnemyBasicAttack").text("");
+      }, 900);
     } else {
       clearInterval(this.intervalId);
     }
@@ -123,21 +125,22 @@ class Enemy {
       target.currentHealth -= this.abilityPower;
       promptItemSelectionOrLoseScreen(playerOne, currentEnemy);
       getHealthBars(target);
-      $('#logEnemyAbilityAttack').text(
-        `-${this.abilityPower}`
-      );
-      setTimeout(function(){$('#logEnemyAbilityAttack').text("")}, 1000)
+      $("#logEnemyAbilityAttack").text(`-${this.abilityPower}`);
+      setTimeout(function () {
+        $("#logEnemyAbilityAttack").text("");
+      }, 1000);
     } else {
       clearInterval(this.intervalId);
     }
   }
-  useHealPower(target){
+  useHealPower(target) {
     if (target.currentHealth > 0 && this.currentHealth > 0) {
       this.currentHealth += this.healing;
-      $('#logEnemyHealAbility').text(
-        `+${this.healing}`);
-        setTimeout(function(){$('#logEnemyHealAbility').text("")}, 1000)
-      getEnemyHealthBar(currentEnemy)
+      $("#logEnemyHealAbility").text(`+${this.healing}`);
+      setTimeout(function () {
+        $("#logEnemyHealAbility").text("");
+      }, 1000);
+      getEnemyHealthBar(currentEnemy);
       promptItemSelectionOrLoseScreen(playerOne, currentEnemy);
     } else {
       clearInterval(this.intervalId);
@@ -156,7 +159,7 @@ let playerOne = new Player("Lucky Hero");
 let firstWeapon = new Weapon("Poopy Stick");
 let firstArmor = new Armor("Paper armor");
 let firstAbility = new Ability("Water Bottle");
-$('#playerName').text(`${playerOne.name}`)
+$("#playerName").text(`${playerOne.name}`);
 
 firstWeapon.boostPlayerAttack(playerOne);
 firstArmor.boostPlayerMaxVitalityAndHealing(playerOne);
@@ -167,13 +170,12 @@ let $firstArmorDescription = `+ ${firstArmor.vitality} vitality`;
 let $firstArmorDescription2 = `+ ${firstArmor.healing} healing`;
 let $firstAbilityDescription = `+ ${firstAbility.abilityPower} ability power`;
 $("#itemBoxWeaponName").text(`${firstWeapon.name}`);
-$('#itemBoxWeaponDescription').text($firstWeaponDescription)
+$("#itemBoxWeaponDescription").text($firstWeaponDescription);
 $("#itemBoxArmorName").text(`${firstArmor.name}`);
-$('#itemBoxArmorDescription').text($firstArmorDescription)
-$('#itemBoxArmorDescription2').text($firstArmorDescription2)
+$("#itemBoxArmorDescription").text($firstArmorDescription);
+$("#itemBoxArmorDescription2").text($firstArmorDescription2);
 $("#itemBoxAbilityName").text(`${firstAbility.name}`);
-$('#itemBoxAbilityDescription').text($firstAbilityDescription)
-
+$("#itemBoxAbilityDescription").text($firstAbilityDescription);
 
 // -----------------Player Stats -----------------------
 const getPlayerStats = () => {
@@ -209,17 +211,17 @@ const createRewardItems = () => {
     `${abilityNames[Math.floor(Math.random() * abilityNames.length)]}`
   );
   let $makeWeaponDiv = $("<div>").attr("id", "rewardWeapon");
-  $makeWeaponDiv.append($("<h2>").attr("id", "weaponName"))
-  $makeWeaponDiv.append($("<p>").attr("id", "weaponDescription"))
+  $makeWeaponDiv.append($("<h2>").attr("id", "weaponName"));
+  $makeWeaponDiv.append($("<p>").attr("id", "weaponDescription"));
 
   let $makeArmorDiv = $("<div>").attr("id", "rewardArmor");
-  $makeArmorDiv.append($("<h2>").attr("id", "armorName"))
-  $makeArmorDiv.append($("<p>").attr("id", "armorDescription"))
-  $makeArmorDiv.append($("<p>").attr("id", "armorDescription2"))
+  $makeArmorDiv.append($("<h2>").attr("id", "armorName"));
+  $makeArmorDiv.append($("<p>").attr("id", "armorDescription"));
+  $makeArmorDiv.append($("<p>").attr("id", "armorDescription2"));
 
   let $makeAbilityDiv = $("<div>").attr("id", "rewardAbility");
-  $makeAbilityDiv.append($("<h2>").attr("id", "abilityName"))
-  $makeAbilityDiv.append($("<p>").attr("id", "abilityDescription"))
+  $makeAbilityDiv.append($("<h2>").attr("id", "abilityName"));
+  $makeAbilityDiv.append($("<p>").attr("id", "abilityDescription"));
 
   $makeWeaponDiv.addClass("rewardItem");
   $makeArmorDiv.addClass("rewardItem");
@@ -241,7 +243,7 @@ const createRewardItems = () => {
 
   $("#weaponDescription").text($rewardWeaponDescription);
   $("#armorDescription").text($rewardArmorDescription);
-  $("#armorDescription2").text($rewardArmorDescription2)
+  $("#armorDescription2").text($rewardArmorDescription2);
   $("#abilityDescription").text($rewardAbilityDescription);
 
   $("#weaponName").text(`${rewardWeapon.name}`);
@@ -255,7 +257,7 @@ const createRewardItems = () => {
       const $selectedtargetsParent = $selectedTarget.parent();
       $selectedtargetsParent.hide();
       $("#itemBoxWeaponName").text(`${rewardWeapon.name}`);
-      $('#itemBoxWeaponDescription').text($rewardWeaponDescription)
+      $("#itemBoxWeaponDescription").text($rewardWeaponDescription);
       playerOne.attackPower = 5;
       playerOne.currentHealth = playerOne.maxVitality;
       rewardWeapon.boostPlayerAttack(playerOne);
@@ -272,8 +274,8 @@ const createRewardItems = () => {
         const $selectedtargetsParent = $selectedTarget.parent();
         $selectedtargetsParent.hide();
         $("#itemBoxArmorName").text(`${rewardArmor.name}`);
-        $('#itemBoxArmorDescription').text($rewardArmorDescription)
-        $('#itemBoxArmorDescription2').text($rewardArmorDescription2)
+        $("#itemBoxArmorDescription").text($rewardArmorDescription);
+        $("#itemBoxArmorDescription2").text($rewardArmorDescription2);
         playerOne.maxVitality = 100;
         playerOne.healing = 2;
         playerOne.currentHealth = playerOne.maxVitality;
@@ -291,7 +293,7 @@ const createRewardItems = () => {
           const $selectedtargetsParent = $selectedTarget.parent();
           $selectedtargetsParent.hide();
           $("#itemBoxAbilityName").text(`${rewardAbility.name}`);
-          $('#itemBoxAbilityDescription').text($rewardAbilityDescription)
+          $("#itemBoxAbilityDescription").text($rewardAbilityDescription);
           playerOne.abilityPower = 10;
           playerOne.currentHealth = playerOne.maxVitality;
           rewardAbility.boostPlayerAbility(playerOne);
@@ -322,14 +324,21 @@ let enemyStatMultiplier = 1;
 let itemStatMultiplier = 1;
 let currentEnemy = null;
 
-const roundCounterDisplay = () =>{
-  $(".numOfEnimiesDefeatedDisplay").text(`Enemies Defeated: ${numOfEnemiesDefeated}`)
-}
+const roundCounterDisplay = () => {
+  $(".numOfEnimiesDefeatedDisplay").text(
+    `Enemies Defeated: ${numOfEnemiesDefeated}`
+  );
+};
 
 const spawnNextEnemy = () => {
-  $('.combatLog').text('')
-  $('.enemyContainer').css({'background-image': 'url(css/img/' + enemyPics[Math.floor(Math.random() * enemyPics.length)] + ')'});
-  roundCounterDisplay()
+  $(".combatLog").text("");
+  $(".enemyContainer").css({
+    "background-image":
+      "url(css/img/" +
+      enemyPics[Math.floor(Math.random() * enemyPics.length)] +
+      ")",
+  });
+  roundCounterDisplay();
   currentEnemy = null;
   currentEnemy = new Enemy(
     `${enemyNames[Math.floor(Math.random() * enemyNames.length)]}`
@@ -340,7 +349,7 @@ const spawnNextEnemy = () => {
   currentEnemy.abilityPower = currentEnemy.abilityPower * enemyStatMultiplier;
   currentEnemy.healing = currentEnemy.healing * enemyStatMultiplier;
   getEnemyHealthBar(currentEnemy);
-  $('#enemyName').text(`${currentEnemy.name}`)
+  $("#enemyName").text(`${currentEnemy.name}`);
   $("#enemyAttackStats").text(`Attack Power: ${currentEnemy.attackPower}`);
   $("#enemyVitStats").text(`Vitality: ${currentEnemy.maxVitality}`);
   $("#enemyArmorStats").text(`healing: ${currentEnemy.healing}`);
@@ -352,7 +361,7 @@ $("#startGame").one("click", (event) => {
   const $selectedTarget = $(event.target);
   const $selectedtargetsParent = $selectedTarget.parent();
   $selectedtargetsParent.hide();
-  $('#container').show()
+  $("#container").show();
   spawnNextEnemy();
   getHealthBars(playerOne);
   getPlayerStats();
@@ -368,8 +377,8 @@ const promptItemSelectionOrLoseScreen = (user, target) => {
     $("#winningItems").show();
     //alert(`Congragulations! You defeated the ${target.name}. Select one of the three items displayed below!`)
   } else if (user.currentHealth <= 0 && target.currentHealth > 0) {
-    $('#container').hide()
-    $('#losingScreen').show()
+    $("#container").hide();
+    $("#losingScreen").show();
   }
 };
 //promptItemSelectionOrLoseScreen(playerOne, currentEnemy)
@@ -382,7 +391,7 @@ const getHealthBars = (player) => {
     player.currentHealth + "/" + player.maxVitality
   );
   let $playerHealthBarFill = $(".healthBarFill").css({
-    width: getPlayerHealthPercentage
+    width: getPlayerHealthPercentage,
   });
 };
 
@@ -405,12 +414,13 @@ const playerUseBasicAttack = (user, target) => {
 const playerUseAbilityAttack = (user, target) => {
   user.useAbilityPower(target);
 };
-const playerUseHealingAbility = (user) =>{
-  user.useHealPower()
-}
-const resetPlayerCoolDowns = () =>{
-  $('.playerBtn').prop('disabled', false);
-}
+const playerUseHealingAbility = (user) => {
+  user.useHealPower();
+};
+const resetPlayerCoolDowns = () => {
+  $(".playerBtn").prop("disabled", false);
+};
+
 // ------- End of Player Attack Button Functions -----------
 
 // -------- phyical attack button now has a cooldown ------------
@@ -436,7 +446,7 @@ $("#playerAbilityAttack").on("click", function () {
 //-----------------Heal ability button ---------------------------
 $("#playerHealAbility").on("click", function () {
   let useHealBtn = $(this);
-  playerUseHealingAbility(playerOne)
+  playerUseHealingAbility(playerOne);
   getHealthBars(playerOne);
   useHealBtn.prop("disabled", true);
   setTimeout(function () {
@@ -458,7 +468,6 @@ const enemyNames = [
   "The Joker",
   "Thanos",
   "Diablo",
-  "Federal Taxes",
   "Covid-19",
   "Too Many Carbs",
   "Enemy With A Bad Name",
@@ -469,6 +478,26 @@ const enemyNames = [
   "Gym Leader",
   "Akatsuki Member",
   "Madara",
+  "Lucifer",
+  "Dr. Wily",
+  "Kerrigan",
+  "Olivia Pierce",
+  "M. Bison",
+  "Ridley",
+  "The Boss",
+  "Zero",
+  "Scorpian",
+  "Skull Face",
+  "Mr. Grimm",
+  "Mr. Ash",
+  "Charlie Kane",
+  "Calypso",
+  "Axel",
+  "Minion",
+  "Roadkill",
+  "Sweet Tooth",
+  "jigsaw",
+  "Chucky"
 ];
 
 const weaponNames = [
@@ -481,6 +510,18 @@ const weaponNames = [
   "Cactus",
   "Bamboo Stick",
   "Twig",
+  "Sling Shot",
+  "Hunter's Bow",
+  "Link's Sword",
+  "King Arthurs Sword",
+  "Luke's Saber",
+  "Vader's Saber",
+  "Bull Whip",
+  "Katana",
+  "Heartseeker",
+  "Orcbane",
+  "Devilish Dicer",
+  "Sentinel Sword"
 ];
 
 const armorNames = [
@@ -494,6 +535,16 @@ const armorNames = [
   "Tree Bark",
   "Stark's Suit",
   "Captain's Shield",
+  "Bronze Armor",
+  "Cobalt Armor",
+  "Ironwood Armor",
+  "A Big Rock",
+  "Wooden Shield",
+  "Obsidian Armor",
+  "Glass Armor",
+  "Dragon Scales",
+  "Mithril Armor"
+
 ];
 
 const abilityNames = [
@@ -506,22 +557,34 @@ const abilityNames = [
   "Charizard",
   "Water Bending Scroll",
   "Dragon Warrior Scroll",
-  "Dominos Pizza Box",
+  "Blastoise",
+  "Rasengan",
+  "Forbidden Scroll",
+  "Nine Tailed Fox",
+  "Four Leaf Grimoire",
+  "Pot of Gold",
+
+
 ];
 
-const enemyPics = ['BarbGame.png', 'devilGame.png', 'diabloGame.png', 'wizGame.png']
+const enemyPics = [
+  "BarbGame.png",
+  "devilGame.png",
+  "diabloGame.png",
+  "wizGame.png",
+];
 
 $(() => {
-  $('#container').hide()
-const $openBtn = $('#openModal');
-const $modal = $('#modal');
-const $closeBtn = $('#close');
-const openModal = () => {
-  $modal.css('display', 'block');
-}
-const closeModal = () => {
-  $modal.css('display', 'none');
-}
-$openBtn.on('click', openModal);
-$closeBtn.on('click', closeModal);
+  $("#container").hide();
+  const $openBtn = $("#openModal");
+  const $modal = $("#modal");
+  const $closeBtn = $("#close");
+  const openModal = () => {
+    $modal.css("display", "block");
+  };
+  const closeModal = () => {
+    $modal.css("display", "none");
+  };
+  $openBtn.on("click", openModal);
+  $closeBtn.on("click", closeModal);
 });

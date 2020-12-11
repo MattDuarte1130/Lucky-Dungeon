@@ -41,8 +41,10 @@ class Player {
         $("#logPlayerHealAbility").text("");
       }, 1000);
     } else {
+      $("#logPlayerHealAbility").text(
+        `+${this.maxVitality - this.currentHealth}`
+      );
       this.currentHealth = this.maxVitality;
-      $("#logPlayerHealAbility").text(`+${this.healing}`);
       setTimeout(function () {
         $("#logPlayerHealAbility").text("");
       }, 1000);
@@ -497,7 +499,7 @@ const enemyNames = [
   "Roadkill",
   "Sweet Tooth",
   "jigsaw",
-  "Chucky"
+  "Chucky",
 ];
 
 const weaponNames = [
@@ -521,7 +523,7 @@ const weaponNames = [
   "Heartseeker",
   "Orcbane",
   "Devilish Dicer",
-  "Sentinel Sword"
+  "Sentinel Sword",
 ];
 
 const armorNames = [
@@ -543,8 +545,7 @@ const armorNames = [
   "Obsidian Armor",
   "Glass Armor",
   "Dragon Scales",
-  "Mithril Armor"
-
+  "Mithril Armor",
 ];
 
 const abilityNames = [
@@ -563,8 +564,6 @@ const abilityNames = [
   "Nine Tailed Fox",
   "Four Leaf Grimoire",
   "Pot of Gold",
-
-
 ];
 
 const enemyPics = [
